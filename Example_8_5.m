@@ -33,7 +33,7 @@ for T=T_vec
     xlim([0,2*T_0])
     xlabel('$t$ (sec.)', 'interpreter', 'latex');
     legend({'$y(t)=s(t)+n(t)$','$s(t)$'}, 'interpreter', 'latex')
-    title(['$\textrm{SNR} = ',num2str(SNR),', T=',num2str(T),'$ sec'], 'interpreter', 'latex')
+    title(['$\mathrm{SNR} = ',num2str(SNR),', T=',num2str(T),'$ sec'], 'interpreter', 'latex')
 
     %Additional optimization of the axes for correct comparison with the correlation curves
     pos=get(gca,'Position');

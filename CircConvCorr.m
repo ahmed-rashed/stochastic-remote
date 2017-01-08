@@ -40,7 +40,7 @@ circ_corr_vec=ifft(conj(fft(x_vec)).*fft(y_vec));plot(t_vec,circ_corr_vec,'-o');
 circ_corr_vec1=fliplr(cconv(x_vec,fliplr(y_vec),K));plot(t_vec,circ_corr_vec1,'-x')
 circ_corr_vec2 = ccorrFunc(x_vec,y_vec);plot(t_vec,circ_corr_vec2,'-^')
 xlabel('$\kappa$', 'interpreter', 'latex')
-ylabel('$\hat{r}_{xy,\kappa}^{\textrm{circ}}$', 'interpreter', 'latex')
+ylabel('$\hat{r}_{xy,\kappa}^{\mathrm{circ}}$', 'interpreter', 'latex')
 title('Circular Correlation')
 legend({'FFT','cconv','sum'})
 

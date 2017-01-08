@@ -62,7 +62,7 @@ for alpha=alpha_vec
 %     end
     
     if ii==1
-        title('Effective power weighting, $w_{\textrm{eff}}^{2}(t)$', 'interpreter', 'latex')
+        title('Effective power weighting, $w_{\mathrm{eff}}^{2}(t)$', 'interpreter', 'latex')
     end
     ylabel([num2str(alpha*100),'% overlap'])
 

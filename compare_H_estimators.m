@@ -58,19 +58,19 @@ subplot(3,2,5);
 plot(t, h_raw);
 xlim([-0.5,T])
 xlabel('$t$ (s)', 'interpreter', 'latex');
-ylabel('$h_{\textrm{raw}}(t)$', 'interpreter', 'latex');
+ylabel('$h_{\mathrm{raw}}(t)$', 'interpreter', 'latex');
 
 subplot(3,2,6);
 semilogy(f(1:N_f_max),abs(H_raw(1:N_f_max)));
 xlabel('$f$ (Hz)', 'interpreter', 'latex');
-ylabel('$H_{\textrm{raw}}$', 'interpreter', 'latex');
+ylabel('$H_{\mathrm{raw}}$', 'interpreter', 'latex');
 
 
 %Plot H_raw beside H_1 estimator
 figure
 ax_mag_h=subplot(4,2,[1:2:5]);
 ax_phase_h=subplot(4,2,7);
-plot_FRF_mag_phase(f(1:N_f_max),H_raw(1:N_f_max),false,ax_mag_h,ax_phase_h,[],'H_{\textrm{raw}}');
+plot_FRF_mag_phase(f(1:N_f_max),H_raw(1:N_f_max),false,ax_mag_h,ax_phase_h,[],'H_{\mathrm{raw}}');
 
 ax_mag_h=subplot(4,2,[1:2:5]+1);
 ax_phase_h=subplot(4,2,7+1);

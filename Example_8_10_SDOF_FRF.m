@@ -63,14 +63,14 @@ subplot(3,1,1:2)
 plot(f_pad(1:N), 20*log10(abs(H(1:N))),f_pad(1:N), 20*log10(abs(H1(1:N))),'r');
 xlabel('$f$ (Hz)','interpreter', 'latex');
 ylabel('$|H(f)|$ (dB)','interpreter', 'latex')
-legend({'$H(f)$','$H_{1}^{\textrm{lin corr}}$'},'interpreter','latex')
+legend({'$H(f)$','$H_{1}^{\mathrm{lin corr}}$'},'interpreter','latex')
 
 %figure(5)
 subplot(3,1,3)
 plot(f_pad(1:N), unwrap(angle(H(1:N))),f_pad(1:N), unwrap(angle(H1(1:N))),'r');
 xlabel('$f$ (Hz)','interpreter', 'latex');
 ylabel('$\angle H(f)$ (rad)','interpreter', 'latex')
-legend({'$H(f)$','$H_{1}^{\textrm{lin corr}}$'},'interpreter','latex')
+legend({'$H(f)$','$H_{1}^{\mathrm{lin corr}}$'},'interpreter','latex')
 
 %% Comments 1 (use T = 2000) %%
 
@@ -96,14 +96,14 @@ subplot(3,1,1:2)
 plot(f_pad(1:N), 20*log10(abs(H1_circ_Corr(1:N))),f_pad(1:N), 20*log10(abs(H1(1:N))), 'r');
 xlabel('$f$ (Hz)','interpreter', 'latex');
 ylabel('$|H(f)|$ (dB)','interpreter', 'latex')
-legend({'$H_{1}^{\textrm{circ corr}}$','$H_{1}^{\textrm{lin corr}}$'},'interpreter','latex')
+legend({'$H_{1}^{\mathrm{circ corr}}$','$H_{1}^{\mathrm{lin corr}}$'},'interpreter','latex')
 
 %figure(2)
 subplot(3,1,3)
 plot(f_pad(1:N), unwrap(angle(H1_circ_Corr(1:N))),f_pad(1:N), unwrap(angle(H1(1:N))), 'r'); hold on;set(gca,'ColorOrderIndex',1);
 xlabel('$f$ (Hz)','interpreter', 'latex');
 ylabel('$\angle H(f)$ (rad)','interpreter', 'latex')
-legend({'$H_{1}^{\textrm{circ corr}}$','$H_{1}^{\textrm{lin corr}}$'},'interpreter','latex')
+legend({'$H_{1}^{\mathrm{circ corr}}$','$H_{1}^{\mathrm{lin corr}}$'},'interpreter','latex')
 
 Sxx_w=cpsd(x,x, hanning(N_pad),N_pad/2, N_pad, fs, 'twosided');
 Sxy_w=cpsd(y/fs,x, hanning(N_pad),N_pad/2, N_pad, fs, 'twosided');
@@ -114,11 +114,11 @@ subplot(3,1,1:2)
 plot(f_pad(1:N), 20*log10(abs(H1_w(1:N))),f_pad(1:N), 20*log10(abs(H1(1:N))), 'r');
 xlabel('$f$ (Hz)','interpreter', 'latex');
 ylabel('$|H(f)|$ (dB)','interpreter', 'latex')
-legend({'$H_{1}^{\textrm{Welch}}$','$H_{1}^{\textrm{lin corr}}$'},'interpreter','latex')
+legend({'$H_{1}^{\mathrm{Welch}}$','$H_{1}^{\mathrm{lin corr}}$'},'interpreter','latex')
 
 %figure(2)
 subplot(3,1,3)
 plot(f_pad(1:N), unwrap(angle(H1_w(1:N))),f_pad(1:N), unwrap(angle(H1(1:N))), 'r'); hold on;set(gca,'ColorOrderIndex',1);
 xlabel('$f$ (Hz)','interpreter', 'latex');
 ylabel('$\angle H(f)$ (rad)','interpreter', 'latex')
-legend({'$H_{1}^{\textrm{Welch}}$','$H_{1}^{\textrm{lin corr}}$'},'interpreter','latex')
+legend({'$H_{1}^{\mathrm{Welch}}$','$H_{1}^{\mathrm{lin corr}}$'},'interpreter','latex')

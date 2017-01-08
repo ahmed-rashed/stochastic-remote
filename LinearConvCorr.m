@@ -44,7 +44,7 @@ lin_corr_vec1=ifft(fft(y_vec,2*K-1).*conj(fft(x_vec,2*K-1)));plot(0:2*K-2,lin_co
 lin_corr_vec2=fliplr(conv(x_vec,fliplr(y_vec)));plot(tau_lin_corr_vec,lin_corr_vec2,'-s')
 lin_corr_vec3=xcorr(y_vec,x_vec);plot(tau_lin_corr_vec,lin_corr_vec3,'-x');
 xlabel('$\kappa$', 'interpreter', 'latex')
-ylabel('$\hat{r}_{xy,\kappa}^{\textrm{lin, biased}}$', 'interpreter', 'latex')
+ylabel('$\hat{r}_{xy,\kappa}^{\mathrm{lin, biased}}$', 'interpreter', 'latex')
 title('Linear Correlation');
 legend({'sum','FFT','cconv','xcorr'})
 

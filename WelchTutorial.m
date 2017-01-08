@@ -40,15 +40,15 @@ Error=max(abs(R_XY_noisy_our-R_XY_noisy_Matlab))
 subplot(3,1,1)
 semilogy(f_col(1:floor(N/2)),R_XX_noisy_Matlab(1:floor(N/2)))
 grid
-title(['$R_{XX}^{\textrm{Welch}}$ for $N=',int2str(N),'$ and $Q=',int2str(Q),'$'], 'interpreter', 'latex')
+title(['$R_{XX}^{\mathrm{Welch}}$ for $N=',int2str(N),'$ and $Q=',int2str(Q),'$'], 'interpreter', 'latex')
 subplot(3,1,2)
 semilogy(f_col(1:floor(N/2)),R_YY_noisy_Matlab(1:floor(N/2)))
 grid
-title(['$R_{YY}^{\textrm{Welch}}$ for $N=',int2str(N),'$ and $Q=',int2str(Q),'$'], 'interpreter', 'latex')
+title(['$R_{YY}^{\mathrm{Welch}}$ for $N=',int2str(N),'$ and $Q=',int2str(Q),'$'], 'interpreter', 'latex')
 subplot(3,1,3)
 semilogy(f_col(1:floor(N/2)),abs(R_XY_noisy_Matlab(1:floor(N/2))))
 grid
-title(['$\left|R_{XY}^{\textrm{Welch}}\right|$ for $N=',int2str(N),'$ and $Q=',int2str(Q),'$'], 'interpreter', 'latex')
+title(['$\left|R_{XY}^{\mathrm{Welch}}\right|$ for $N=',int2str(N),'$ and $Q=',int2str(Q),'$'], 'interpreter', 'latex')
 xlabel('$f$ (Hz)', 'interpreter', 'latex')
 
 export_figure(gcf,'||',{'WelchSpectralDensity'})

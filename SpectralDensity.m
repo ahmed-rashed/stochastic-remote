@@ -52,15 +52,15 @@ f_col=(0:N-1).'*D_f;
 subplot(3,2,2)
 semilogy(f_col(1:floor(N/2)),R_XX_noisy_Welc(1:floor(N/2)))
 grid
-title(['$R_{XX}^{\textrm{Welch}}$ for $N=',int2str(N),'$ and $Q=',int2str(Q),'$'], 'interpreter', 'latex')
+title(['$R_{XX}^{\mathrm{Welch}}$ for $N=',int2str(N),'$ and $Q=',int2str(Q),'$'], 'interpreter', 'latex')
 subplot(3,2,4)
 semilogy(f_col(1:floor(N/2)),R_YY_noisy_Welc(1:floor(N/2)))
 grid
-title(['$R_{YY}^{\textrm{Welch}}$ for $N=',int2str(N),'$ and $Q=',int2str(Q),'$'], 'interpreter', 'latex')
+title(['$R_{YY}^{\mathrm{Welch}}$ for $N=',int2str(N),'$ and $Q=',int2str(Q),'$'], 'interpreter', 'latex')
 subplot(3,2,6)
 semilogy(f_col(1:floor(N/2)),abs(R_XY_noisy_Welc(1:floor(N/2))))
 grid
-title(['$\left|R_{XY}^{\textrm{Welch}}\right|$ for $N=',int2str(N),'$ and $Q=',int2str(Q),'$'], 'interpreter', 'latex')
+title(['$\left|R_{XY}^{\mathrm{Welch}}\right|$ for $N=',int2str(N),'$ and $Q=',int2str(Q),'$'], 'interpreter', 'latex')
 xlabel('$f$ (Hz)', 'interpreter', 'latex')
 
 export_figure(gcf,'||',{'SpectralDensity'})

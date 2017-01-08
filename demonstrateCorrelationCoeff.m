@@ -33,13 +33,13 @@ for i_row=1:3
         elseif i_row==2
             y_row=a_vec(i_a)*x_row+noise_row;
             if a_vec(i_a)==1
-                ylabel_text='$y=x+\textrm{noise}$';
+                ylabel_text='$y=x+\mathrm{noise}$';
             elseif a_vec(i_a)==-1
-                ylabel_text='$y=-x+\textrm{noise}$';
+                ylabel_text='$y=-x+\mathrm{noise}$';
             elseif a_vec(i_a)==0
-                ylabel_text='$y=\textrm{noise}$';
+                ylabel_text='$y=\mathrm{noise}$';
             else
-                ylabel_text=['$y=',num2str(a_vec(i_a)),'x+\textrm{noise}$'];
+                ylabel_text=['$y=',num2str(a_vec(i_a)),'x+\mathrm{noise}$'];
             end
         else
             y_row=x_row.^(b_vec(i_a))/10;

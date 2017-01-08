@@ -40,7 +40,7 @@ for n=1:N_SNR
     if SNR_vec(n)==inf
         title('$x(t)=a\ s(t-\Delta_{1})+b\ s(t-\Delta_{2})$','interpreter', 'latex')
     else
-        title('$x(t)=a \, s(t-\Delta_{1})+b \, s(t-\Delta_{2})+\textrm{noise}$','interpreter', 'latex')
+        title('$x(t)=a \, s(t-\Delta_{1})+b \, s(t-\Delta_{2})+\mathrm{noise}$','interpreter', 'latex')
     end
     ylim([-4 4])
 

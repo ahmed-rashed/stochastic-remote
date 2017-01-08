@@ -25,7 +25,7 @@ grid
 
 subplot(3,1,2)
 plot(prob_H_hat)
-ylabel('$\widehat{\mathrm{Prob}}\left(\textrm{H}\right)$', 'interpreter', 'latex')
+ylabel('$\widehat{\mathrm{Prob}}\left(\mathrm{H}\right)$', 'interpreter', 'latex')
 ylim([0 1])
 set(gca,'YTick',[0:.1:1])
 set(gca,'XTickLabel',[]);
@@ -34,7 +34,7 @@ grid
 subplot(3,1,3)
 plot(prob_T_hat)
 xlabel('$K$; Number of trials', 'interpreter', 'latex')
-ylabel('$\widehat{\mathrm{Prob}}\left(\textrm{T}\right)$', 'interpreter', 'latex')
+ylabel('$\widehat{\mathrm{Prob}}\left(\mathrm{T}\right)$', 'interpreter', 'latex')
 ylim([0 1])
 set(gca,'YTick',[0:.1:1])
 grid

@@ -42,7 +42,7 @@ for ii=1:N_SNR
     plot(t_vec,x_vec)
     xlabel('$t$ (sec.)', 'interpreter', 'latex');
     ylabel('$x(t)$', 'interpreter', 'latex')
-    title(['$\textrm{SNR} = ',num2str(SNR_vec(ii)),'$'], 'interpreter', 'latex')
+    title(['$\mathrm{SNR} = ',num2str(SNR_vec(ii)),'$'], 'interpreter', 'latex')
     
     %Additional optimization of the axes for correct comparison with the correlation curves
     pos=get(gca,'Position');

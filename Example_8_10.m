@@ -26,7 +26,7 @@ H_fft=fft(h_exact)/f_s;
 
 figure
 [ax_mag_h,ax_phase_h]=plot_FRF_mag_phase(f_row(1:floor(N/2)), [H_exact(1:floor(N/2));H_fft(1:floor(N/2))],0);
-legend(ax_mag_h,{'$H(f)^{\textrm{exact}}$','$H^{\textrm{FFT}}$'},'interpreter','latex')
+legend(ax_mag_h,{'$H(f)^{\mathrm{exact}}$','$H^{\mathrm{FFT}}$'},'interpreter','latex')
 
 RecordLengthMultiplier=800; % 40 and 800
 TT=RecordLengthMultiplier*T;
@@ -46,15 +46,15 @@ tau=kappa*D_t;
 figure
 subplot(3,1,1)
 plot(tau,r_xx_lin)
-title('$r_{xx}^{\textrm{lin corr}} (\tau)$','interpreter', 'latex')
+title('$r_{xx}^{\mathrm{lin corr}} (\tau)$','interpreter', 'latex')
 
 subplot(3,1,2)
 plot(tau,r_yy_lin)
-title('$r_{yy}^{\textrm{lin corr}} (\tau)$','interpreter', 'latex')
+title('$r_{yy}^{\mathrm{lin corr}} (\tau)$','interpreter', 'latex')
 
 subplot(3,1,3)
 plot(tau,r_xy_lin)
-title('$r_{xy}^{\textrm{lin corr}} (\tau)$','interpreter', 'latex')
+title('$r_{xy}^{\mathrm{lin corr}} (\tau)$','interpreter', 'latex')
 xlabel('$\tau$','interpreter', 'latex');
 
 K_pad=2*K-1;
@@ -73,7 +73,7 @@ H_exact1=A./(-(2*pi*f_pad).^2+2*1i*zeta*w_n*(2*pi*f_pad)+w_n^2);
 
 figure
 [ax_mag_h,ax_phase_h]=plot_FRF_mag_phase(f_pad(1:N), [H_exact1(1:N);H_interpolated(1:N);H1(1:N)],0);
-legend(ax_mag_h,{'$H(f)^{\textrm{exact}}$','$H(f)^{\textrm{interpolated}}$','$H_{1}^{\textrm{lin corr}}$'},'interpreter','latex')
+legend(ax_mag_h,{'$H(f)^{\mathrm{exact}}$','$H(f)^{\mathrm{interpolated}}$','$H_{1}^{\mathrm{lin corr}}$'},'interpreter','latex')
 
 %%Comments 1 (use T = 2000) %%
 figure
@@ -101,7 +101,7 @@ H1_circ_Corr=R_XY_circ_Corr./R_XX_circ_Corr;
 
 % figure
 % [ax_mag_h,ax_phase_h]=plot_FRF_mag_phase(ff(1:floor(KK/2)), H1_circ_Corr(1:floor(KK/2)),0);
-% legend(ax_mag_h,{'$H_{1}^{\textrm{circ corr}}$','$H_{1}^{\textrm{lin corr}}$'},'interpreter','latex')
+% legend(ax_mag_h,{'$H_{1}^{\mathrm{circ corr}}$','$H_{1}^{\mathrm{lin corr}}$'},'interpreter','latex')
 % grid(ax_mag_h,'off')
 % grid(ax_phase_h,'off')
 
@@ -113,6 +113,6 @@ H1_Welch=R_XY_Welch./R_XX_Welch;
 
 figure
 [ax_mag_h,ax_phase_h]=plot_FRF_mag_phase(f_pad(1:N), [H1_circ_Corr.';H1_Welch(1:N);H1(1:N)],0);
-legend(ax_mag_h,{'$H_{1}^{\textrm{periodogram}}$','$H_{1}^{\textrm{Welch}}$','$H_{1}^{\textrm{lin corr}}$'},'interpreter','latex')
+legend(ax_mag_h,{'$H_{1}^{\mathrm{periodogram}}$','$H_{1}^{\mathrm{Welch}}$','$H_{1}^{\mathrm{lin corr}}$'},'interpreter','latex')
 grid(ax_mag_h,'off')
 grid(ax_phase_h,'off')

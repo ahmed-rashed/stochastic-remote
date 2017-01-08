@@ -63,7 +63,7 @@ for nn=1:length(SNR_x)
     ax_mag_h=subplot(6,1,3:5);
     ax_phase_h=subplot(6,1,6);
     plot_FRF_mag_phase(f_col,[H_exact,H_DFT,H_1,H_2,H_T],false,ax_mag_h,ax_phase_h);
-    legend(ax_mag_h,{'$H_{\textrm{exact}}$','$\mathrm{DFT}\left[h_{\textrm{exact}}\right]$','$H_{1}$','$H_{2}$','$H_{\textrm{T}}$'},'interpreter','latex')
+    legend(ax_mag_h,{'$H_{\mathrm{exact}}$','$\mathrm{DFT}\left[h_{\mathrm{exact}}\right]$','$H_{1}$','$H_{2}$','$H_{\mathrm{T}}$'},'interpreter','latex')
     xlim(ax_mag_h,[0,f_s/2])
     xlim(ax_phase_h,[0,f_s/2])
 
