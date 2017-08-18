@@ -1,6 +1,6 @@
-function Example_8_3()
 clc
 close all
+clearvars
 
 %DFT parameters
 f_s=200;
@@ -40,7 +40,7 @@ for ii=1:N_SNR
 
     subplot(4,1,1)
     plot(t_vec,x_vec)
-    xlabel('$t$ (sec.)', 'interpreter', 'latex');
+    %xlabel('$t$ (sec.)', 'interpreter', 'latex');
     ylabel('$x(t)$', 'interpreter', 'latex')
     title(['$\mathrm{SNR} = ',num2str(SNR_vec(ii)),'$'], 'interpreter', 'latex')
     
@@ -65,7 +65,7 @@ for ii=1:N_SNR
     subplot(4,1,3)
     plot(tau,r_yy)
     axis tight
-    xlabel('$\tau$ (sec.)', 'interpreter', 'latex');
+    %xlabel('$\tau$ (sec.)', 'interpreter', 'latex');
     ylabel('$r_{yy}(\tau)$', 'interpreter', 'latex');
     set(gca,'XGrid','on')
     

@@ -1,6 +1,6 @@
-function Example_8_5()
 clc
 close all
+clearvars
 
 set(groot,'DefaultAxesColorOrder',[0,0,1;1,0,0;0,0.5,0;1,0,1;0,0,0])
 set(groot,'DefaultLineLineWidth',1);

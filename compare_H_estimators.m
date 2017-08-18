@@ -5,8 +5,7 @@ set(groot,'DefaultLineLineWidth',1);
 
 load CantiliverBeamImpactTest    %loads x_rows and y_rows
 
-Q=size(x_rows,1);
-N=size(x_rows,2);
+[Q,N]=size(x_rows);
 f_s=256;
 [T,d_t,d_f]=samplingParameters_fs_N(f_s,N);
 
@@ -33,24 +32,22 @@ H_1=R_XY./R_XX;
 figure
 subplot(3,2,1)
 plot(t, x_rows(1,:));
-xlabel('$t$ (s)', 'interpreter', 'latex');
 xlim([-0.5,T])
 ylabel('$x_{1}(t)$', 'interpreter', 'latex');
 
 subplot(3,2,2)
 semilogy(f(1:N_f_max), abs(X_rows(1,1:N_f_max)));
-xlabel('$f$ (Hz)', 'interpreter', 'latex');
+axis tight
 ylabel('$\left|X_{1}(f)\right|$', 'interpreter', 'latex');
 
 subplot(3,2,3)
 plot(t, y_rows(1,:));
 xlim([-0.5,T])
-xlabel('$t$ (s)', 'interpreter', 'latex');
 ylabel('$y_{1}(t)$', 'interpreter', 'latex');
 
 subplot(3,2,4)
 semilogy(f(1:N_f_max), abs(Y_rows(1,1:N_f_max)));
-xlabel('$f$ (Hz)', 'interpreter', 'latex');
+axis tight
 ylabel('$\left|Y_{1}(f)\right|$', 'interpreter', 'latex');
 
 %Plot h_raw & H_raw
@@ -62,20 +59,23 @@ ylabel('$h_{\mathrm{raw}}(t)$', 'interpreter', 'latex');
 
 subplot(3,2,6);
 semilogy(f(1:N_f_max),abs(H_raw(1:N_f_max)));
+axis tight
 xlabel('$f$ (Hz)', 'interpreter', 'latex');
-ylabel('$H_{\mathrm{raw}}$', 'interpreter', 'latex');
+ylabel('$\left|H_{\mathrm{raw}}(f)\right|$', 'interpreter', 'latex');
 
 
 %Plot H_raw beside H_1 estimator
 figure
-ax_mag_h=subplot(4,2,[1:2:5]);
-ax_phase_h=subplot(4,2,7);
-plot_FRF_mag_phase(f(1:N_f_max),H_raw(1:N_f_max),false,ax_mag_h,ax_phase_h,[],'H_{\mathrm{raw}}');
+ax_mag_h=subplot(4,1,[1:3]);hold on;axis tight
+ax_phase_h=subplot(4,1,4);hold on;axis tight
+plot_FRF_mag_phase(f(1:N_f_max),H_raw(1:N_f_max),false,ax_mag_h,ax_phase_h,[]);
+plot_FRF_mag_phase(f(1:N_f_max),H_1(1:N_f_max),false,ax_mag_h,ax_phase_h,[]);
+legend(ax_mag_h,{'$\left|H_{\mathrm{raw}}(f)\right|$','$\left|\hat{H}_{1}(f)\right|$'}, 'interpreter', 'latex')
+legend(ax_phase_h,{'$\angle \left(H_{\mathrm{raw}}(f)\right)$ (rad)','$\angle \left(\hat{H}_{1}(f)\right)$ (rad)'}, 'interpreter', 'latex')
 
-ax_mag_h=subplot(4,2,[1:2:5]+1);
-ax_phase_h=subplot(4,2,7+1);
-plot_FRF_mag_phase(f(1:N_f_max),H_1(1:N_f_max),false,ax_mag_h,ax_phase_h,[],'\hat{H}_{1}');
+
 
 set(groot,'DefaultLineLineWidth','remove');
 
-export_figure([1:2],'==',{'CantiliverBeamImpactTest_Signals';'CantiliverBeamImpactTest_FRF'})
+export_figure(1,'||',{'CantiliverBeamImpactTest_Signals'})
+export_figure(2,'',{'CantiliverBeamImpactTest_FRF'})

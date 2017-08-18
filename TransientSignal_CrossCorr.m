@@ -1,6 +1,6 @@
-function Example_9_3()
 clc
 close all
+clearvars
 
 %DFT parameters
 a=1; b=0.8; c=0.75;
@@ -60,15 +60,15 @@ xlim([0,2*max(D_T_1,D_T_2)])
 R_XX=cpsd(x_vec,x_vec, hanning(K),K/2, K, f_s);  %Welch 50% overlap
 R_YY=cpsd(y_vec,y_vec, hanning(K),K/2, K, f_s);
 R_XY=cpsd(y_vec,x_vec, hanning(K),K/2, K, f_s);
-f=(0:N-1)*D_f;
 Gamma_2_XY=abs(R_XY).^2./(R_XX.*R_YY);
 
+f_vec=(0:N/2)*D_f;
 figure
-plot(f,unwrap(angle(R_XY)))
+plot(f_vec,unwrap(angle(R_XY)))
 xlabel('$f$ (Hz)', 'interpreter', 'latex')
 ylabel('arg\itG_x_y\rm(\itf\rm) (rad)')
 
 figure
-plot(f,Gamma_2_XY)
+plot(f_vec,Gamma_2_XY)
 xlabel('$f$ (Hz)', 'interpreter', 'latex')
 ylabel('Coherence function')
