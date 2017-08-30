@@ -35,7 +35,7 @@ rng(10);
 for N_avg=1:N_avg_vec(end)
     singnalPure_i=sin(2*pi*f0*t+randn*T);   %Pure sine but with random start phase
     noise_i=filtfilt(b,a,randn(size(t)));   %performs zero-phase digital filtering. The resulting sequence N_avg is the band-limited (zero to f_c) white noise.
-    noise_i=std(singnalPure_i)/std(noise_i)/sqrt(db2lin(SNR_db))*noise_i;  %Scales the noise so that the SNR is as given
+    noise_i=std(singnalPure_i)/std(noise_i)/sqrt(db2mag(SNR_db))*noise_i;  %Scales the noise so that the SNR is as given
     signal_i=singnalPure_i+noise_i;
     
     r_nn_i_padded=xcorr_xspec_linear(signal_i,signal_i,'unbiased');
