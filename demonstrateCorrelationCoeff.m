@@ -1,6 +1,6 @@
-function demonstrateCorrelationCoeff()
-close all
 clc
+close all
+clearvars
 
 N=100;
 
@@ -13,7 +13,7 @@ noise_row=randn(1,N); % Uncorrelated noise
 
 a_vec=[2:-1:-2].';
 b_vec=[2;3;4;5;6];
-if any(size(a_vec)~=size(b_vec)),error('a_col & b_col must have the same size'),end
+if any(size(a_vec)~=size(b_vec)),error('a_vec & b_vec must have the same size'),end
 N_a=length(a_vec);
 
 figure
@@ -52,10 +52,11 @@ for i_row=1:3
         
         mu_y=mean(y_row);
         StdDev_y=std(y_row);    %Unbiased covariance
-
         c_xy=sum((x_row-mu_x).*(y_row-mu_y))/(N-1);  %Unbiased covariance
-
         CorrCoeff_xy=c_xy/(StdDev_x*StdDev_y);
+        CorrCoeff_xy_mat=corrcoef(x_row,y_row);
+        CorrCoeff_xy_1=CorrCoeff_xy_mat(1,2);
+        error=CorrCoeff_xy-CorrCoeff_xy_1
 
         subplot(3,N_a,(i_row-1)*N_a+i_a)
         plot(x_row,y_row,'.')

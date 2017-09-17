@@ -1,6 +1,5 @@
 clearvars
-% close all
-figure
+close all
 clc
 
 set(groot,'DefaultAxesColorOrder',[0,0,1;0,0,0;1,0,0;0,0.5,0;1,0,1])
@@ -37,7 +36,8 @@ for alpha=alpha_vec
         k_start=(p-1)*(K-K_o+1)+1;
         p_sig_ind=(0:K-1)+k_start;
         t_col=t_tot_col(p_sig_ind);
-        plot(t_col/T,win_col)
+        hLine=plot(t_col/T,win_col);
+        set(get(get(hLine,'Annotation'),'LegendInformation'),'IconDisplayStyle','off'); % Exclude line from legend
 
         win_2_eff_col(p_sig_ind)=win_2_eff_col(p_sig_ind)+win_col.^2;
     end
@@ -49,23 +49,25 @@ for alpha=alpha_vec
     end
     
     if ii==1
-        title('Overlapped windows, $w(t)$', 'interpreter', 'latex')
+        title('Overlapped weighting functions, $w(t)$', 'interpreter', 'latex')
     end
     ylabel(['$\alpha=',num2str(alpha*100),'\%$'], 'interpreter', 'latex')
     
-    subplot(length(alpha_vec),2,2*ii)
+%    subplot(length(alpha_vec),2,2*ii)
     plot(t_tot_col/T,win_2_eff_col)
-    grid
-    if ii<length(alpha_vec)
-        set(gca,'XTickLabel',[]);
-    else
-        xlabel('$t/T$', 'interpreter', 'latex')
-    end
+%    grid
+%     if ii<length(alpha_vec)
+%         set(gca,'XTickLabel',[]);
+%     else
+%         xlabel('$t/T$', 'interpreter', 'latex')
+%     end
     
-    if ii==1
-        title(['$w_{\mathrm{eff}}^{2}(t)$ for ',win_name{i_win},' window'], 'interpreter', 'latex')
-    end
+%     if ii==1
+%         title('Effective power weighting, $w_{\mathrm{eff}}^{2}(t)$', 'interpreter', 'latex')
+%     end
 %     ylabel(['$\alpha=',num2str(alpha*100),'\%$'], 'interpreter', 'latex')
+    
+    legend({'Effective power weighting, $w_{\mathrm{eff}}^{2}(t)$'}, 'interpreter', 'latex')
 
     ii=ii+1;
 end

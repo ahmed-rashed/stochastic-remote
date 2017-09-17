@@ -1,8 +1,7 @@
-function SpectralDensity()
+clearvars
 close all
 clc
 
-%%%
 f_s=1000;
 D_t=1/f_s;
 

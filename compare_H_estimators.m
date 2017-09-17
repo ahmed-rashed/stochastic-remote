@@ -5,7 +5,7 @@ set(groot,'DefaultLineLineWidth',1);
 
 load CantiliverBeamImpactTest    %loads x_rows and y_rows
 
-[Q,N]=size(x_rows);
+[P,N]=size(x_rows);
 f_s=256;
 [T,D_t,D_f]=samplingParameters_fs_N(f_s,N);
 

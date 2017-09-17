@@ -7,9 +7,8 @@ set(groot,'DefaultLineLineWidth',1);
 
 %DFT parameters
 T=4;
-f_s=200;
-
-[D_t,K]=samplingParameters_T_fs(T,f_s);
+K=2^10; %K=1024
+[D_t,f_s,D_f]=samplingParameters_T_N(T,K);
 t_vec=(0:K-1)*D_t;
 tau=(-(K-1):K-1)*D_t;
 
@@ -72,9 +71,9 @@ for ii=1:N_SNR
 
     x_vec_hat=x_vec+std(x_vec)*randn(1,K)/SNR_vec(ii);
     y_vec_hat=y_vec+std(y_vec)*randn(1,K)/SNR_vec(ii);
-    r_xx_hat=xcorr(x_vec_hat,x_vec_hat,'unbiased'); %linear auto-correlation
-    r_yy_hat=xcorr(y_vec_hat,y_vec_hat,'unbiased'); %linear auto-correlation
-    r_xy_hat=xcorr(y_vec_hat,x_vec_hat,'unbiased'); %linear cross-correlation
+    r_xx_hat=xcorr(x_vec_hat,x_vec_hat,'none'); %unscaled inear auto-correlation for transient signals
+    r_yy_hat=xcorr(y_vec_hat,y_vec_hat,'none'); %unscaled linear auto-correlation for transient signals
+    r_xy_hat=xcorr(y_vec_hat,x_vec_hat,'none'); %unscaled linear cross-correlation for transient signals
     %tau=(-(K-1):K-1)*D_t;
 
     plot(x_ax,t_vec,x_vec_hat,'LineWidth',line_width)
@@ -88,11 +87,15 @@ legend(r_xy_hat_ax,legend_str,'Location','southwest', 'interpreter', 'latex')
 set(groot,'DefaultAxesColorOrder','remove')
 set(groot,'DefaultLineLineWidth','remove');
 
-export_figure(gcf,'==',{'SNR'})
+export_figure(gcf,'==',{'Echo_Correlation'})
 
 function s_vec=burst_tone(t_vec,f_0,T_burst)
 s_vec=zeros(size(t_vec));
 mask=t_vec<=T_burst & t_vec>=0;
 s_vec(mask)=sin(2*pi*f_0*t_vec(mask));
+
+end
+
+function s_vec=baseBandRandom(t_vec,t_before,t_after,f_c_by_f_s_2)
 
 end
