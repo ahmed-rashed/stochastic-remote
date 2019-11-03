@@ -8,9 +8,9 @@ set(groot,'DefaultLineLineWidth',1);
 A=1; f_0=1;
 f_s=200*f_0;
 
-SNR=1/sqrt(2);  %SNR = -3dB
+SNR=1/sqrt(2);  %SNR=-3dB
 f_c=f_s/10;     %cut-off frequency of the digital filter
-[b,a] = butter(9,f_c/(f_s/2));  %designs a 9th-order low-pass digital Butterworth filter (IIR), where b is a vector containing coefficients of a moving average part and a is a vector containing coefficients of an auto-regressive part of the transfer function (see Equation (6.12) of Shin's book).
+[b,a]=butter(9,f_c/(f_s/2));  %designs a 9th-order low-pass digital Butterworth filter (IIR), where b is a vector containing coefficients of a moving average part and a is a vector containing coefficients of an auto-regressive part of the transfer function (see Equation (6.12) of Shin's book).
 
 T_0=1/f_0;
 T_vec=[2,100,1000]*T_0;
@@ -35,7 +35,7 @@ for T=T_vec
     %xlim([0,2*T_0])
     xlabel('$t$ (sec.)', 'interpreter', 'latex');
     legend({'$\hat{x}(t)=x(t)+n(t)$','$x(t)$'}, 'interpreter', 'latex')
-    title(['$\mathrm{SNR} = ',num2str(SNR),', T=',num2str(T),'$ sec'], 'interpreter', 'latex')
+    title(['$\mathrm{SNR}=',num2str(SNR),', T=',num2str(T),'$ sec'], 'interpreter', 'latex')
 
     %Additional optimization of the axes for correct comparison with the correlation curves
     pos=get(gca,'Position');

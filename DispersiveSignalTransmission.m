@@ -53,9 +53,10 @@ ylabel('$r_{xy}(\tau)$', 'interpreter', 'latex')
 xlim([0,2*max(D_T_1,D_T_2)])
 
 %Welch with hanning window and 50% overlap
-R_XX=cpsd(x_vec,x_vec, hanning(K),K/2, K, f_s);
-R_YY=cpsd(y_vec,y_vec, hanning(K),K/2, K, f_s);
-R_XY=cpsd(y_vec,x_vec, hanning(K),K/2, K, f_s);
+win_col=window(@hann,K,'periodic');
+R_XX=cpsd(x_vec,x_vec,win_col,K/2, K, f_s);
+R_YY=cpsd(y_vec,y_vec,win_col,K/2, K, f_s);
+R_XY=cpsd(y_vec,x_vec,win_col,K/2, K, f_s);
 Gamma_2_XY=abs(R_XY).^2./(R_XX.*R_YY);
 
 f_vec=(0:N/2)*D_f;

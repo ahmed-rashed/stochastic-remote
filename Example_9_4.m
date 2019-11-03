@@ -54,7 +54,7 @@ for nn=1:length(SNR_x)
     grid
     set(gca,'XTickLabel',[]);
     ylabel('$\gamma_{YX}^{2}(f)$','interpreter','latex')
-    title(['SNR_x = ',num2str(SNR_x(nn)),' & SNR_y = ',num2str(SNR_y(nn))])
+    title(['SNR_x=',num2str(SNR_x(nn)),' & SNR_y=',num2str(SNR_y(nn))])
 
     H_1=R_XY./R_XX; 
     H_2=R_YY./R_YX;

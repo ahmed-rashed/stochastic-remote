@@ -42,7 +42,7 @@ legend({'FFT','cconv'},'Location','southeast')
 subplot(3,2,6)
 circ_corr_vec=ifft(conj(fft(x_vec)).*fft(y_vec));
 circ_corr_vec1=fliplr(cconv(x_vec,fliplr(y_vec),K));
-circ_corr_vec2 = ccorrFunc(x_vec,y_vec);
+circ_corr_vec2=ccorrFunc(x_vec,y_vec);
 plot(t_vec,circ_corr_vec,t_vec,circ_corr_vec1,t_vec,circ_corr_vec2);
 xlabel('$\kappa$', 'interpreter', 'latex')
 ylabel('$r_{xy,\kappa}^{\mathrm{circ}}$', 'interpreter', 'latex')

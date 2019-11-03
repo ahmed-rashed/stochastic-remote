@@ -75,7 +75,7 @@ figure
 [ax_mag_h,ax_phase_h]=plot_FRF_mag_phase(f_pad(1:N), [H_exact1(1:N);H_interpolated(1:N);H1(1:N)],0);
 legend(ax_mag_h,{'$H(f)^{\mathrm{exact}}$','$H(f)^{\mathrm{interpolated}}$','$H_{1}^{\mathrm{lin corr}}$'},'interpreter','latex')
 
-%%Comments 1 (use T = 2000) %%
+%%Comments 1 (use T=2000) %%
 figure
 plot(t_row,h_exact,tau, r_xy_lin);
 legend({'$h(t)$','$r_{xy}(\tau)$'},'interpreter','latex')

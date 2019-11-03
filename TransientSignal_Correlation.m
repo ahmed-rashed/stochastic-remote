@@ -62,10 +62,10 @@ xlabel(r_xy_hat_ax,'$\tau$ (sec.)', 'interpreter', 'latex')
 rng(0);
 for ii=1:N_SNR
     if SNR_vec(ii)==inf
-        legend_str{ii}='$\mathrm{SNR} = \infty$';
+        legend_str{ii}='$\mathrm{SNR}=\infty$';
         line_width=get(groot,'DefaultLineLineWidth')*1.5;
     else
-        legend_str{ii}=['$\mathrm{SNR} = ',num2str(SNR_vec(ii)),'$'];
+        legend_str{ii}=['$\mathrm{SNR}=',num2str(SNR_vec(ii)),'$'];
         line_width=get(groot,'DefaultLineLineWidth');
     end
 

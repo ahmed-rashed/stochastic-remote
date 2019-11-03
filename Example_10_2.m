@@ -22,10 +22,10 @@ rng(0);
 x=randn(1,Nt); 
 y=filter(h,1,x); % we do not scale for convenience.
 
-Gamma_1     = mscohere(x(1:Ns*N1),y(1:Ns*N1),hanning(N1), [], N4,f_s);
-Gamma_2     = mscohere(x(1:Ns*N2),y(1:Ns*N2),hanning(N2), [], N4,f_s);
-Gamma_3     = mscohere(x(1:Ns*N3),y(1:Ns*N3),hanning(N3), [], N4,f_s);
-[Gamma_4,f] = mscohere(x(1:Ns*N4),y(1:Ns*N4),hanning(N4), [], N4,f_s);
+Gamma_1    =mscohere(x(1:Ns*N1),y(1:Ns*N1),hanning(N1), [], N4,f_s);
+Gamma_2    =mscohere(x(1:Ns*N2),y(1:Ns*N2),hanning(N2), [], N4,f_s);
+Gamma_3    =mscohere(x(1:Ns*N3),y(1:Ns*N3),hanning(N3), [], N4,f_s);
+[Gamma_4,f]=mscohere(x(1:Ns*N4),y(1:Ns*N4),hanning(N4), [], N4,f_s);
 
 plot(f, [Gamma_1 Gamma_2 Gamma_3 Gamma_4])
 xlabel('$f$ (Hz)','interpreter','latex')

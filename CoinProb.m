@@ -5,21 +5,21 @@ close all
 N_max=3e2;
 
 rng(0);
-%x=round(rand(1,K_max)); % 1: head, 0: tail
-x=randi(2,1,N_max)-1; % 1: head, 0: tail
+%x_row=round(rand(1,N_max)); % 1: head_row, 0: tail_row
+x_row=randi(2,1,N_max)-1; % 1: head_row, 0: tail_row
 
 N_vec=1:N_max;
-head= x==1;
-tail= x==0;
+head_row= x_row==1;
+tail_row= x_row==0;
 
-n_head_vec=cumsum(head);
-n_tail_vec=cumsum(tail);
+n_head_vec=cumsum(head_row);
+n_tail_vec=cumsum(tail_row);
 
 prob_H_hat=n_head_vec./N_vec;
 prob_T_hat=n_tail_vec./N_vec;
 
 subplot(3,1,1)
-plot(x,'.-')
+plot(x_row,'.-')
 ylabel('Coin Face', 'interpreter', 'latex')
 ylim([-.1 1.1])
 set(gca,'XTickLabel',[],'YTick',[0,1],'YTickLabel',{'H','T'});

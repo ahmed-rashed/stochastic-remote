@@ -72,7 +72,7 @@ xlabel('$f$ (Hz)','interpreter', 'latex');
 ylabel('$\angle H(f)$ (rad)','interpreter', 'latex')
 legend({'$H(f)$','$H_{1}^{\mathrm{lin corr}}$'},'interpreter','latex')
 
-%% Comments 1 (use T = 2000) %%
+%% Comments 1 (use T=2000) %%
 
 % figure(1)
 % plot(t,4*h); hold on
@@ -85,7 +85,7 @@ legend({'$H(f)$','$H_{1}^{\mathrm{lin corr}}$'},'interpreter','latex')
 % plot(tau, r_yy_lin, 'r:'); hold off
 % xlabel('Lag (\it\tau\rm)'); ylabel('Amplitude')
 
-%% Comments 2 (use T = 100) %%
+%% Comments 2 (use T=100) %%
 Sxx_circ_Corr=cpsd(x,x,ones(size(x)),0,N_pad, fs, 'twosided');
 Sxy_circ_Corr=cpsd(y/fs,x, ones(size(y)),0, N_pad, fs, 'twosided');
 H1_circ_Corr=Sxy_circ_Corr./Sxx_circ_Corr;

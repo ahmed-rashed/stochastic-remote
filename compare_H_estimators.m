@@ -1,4 +1,4 @@
-function compare_H_estimators()
+clearvars
 clc
 close all
 set(groot,'DefaultLineLineWidth',1);
@@ -13,8 +13,8 @@ Beta=1.28;  %over sampling facor defined as f_s=2*f_max*Beta
 f_max=f_s/2/Beta;
 N_f_max=round(N/2/Beta);
 
-f=(0:N-1)*D_f;
-t=(0:N-1)*D_t;
+f_row=(0:N-1)*D_f;
+t_row=(0:N-1)*D_t;
 
 X_rows=fft(x_rows,[],2);
 Y_rows=fft(y_rows,[],2);
@@ -28,29 +28,29 @@ R_XY=mean(Y_rows.*conj(X_rows));
 R_XX=mean(X_rows.*conj(X_rows));
 H_1=R_XY./R_XX;
 
-%Plot the first measured x and y along with their FFT
+%Plot the first measured x and y signals along with their FFT
 figure
 subplot(3,2,1)
-plot(t, x_rows(1,:));
+plot(t_row, x_rows(1,:));
 xlim([-0.5,T])
 set(gca,'XTickLabel',[]);
 ylabel('$x_{1}(t)$', 'interpreter', 'latex');
 
 subplot(3,2,2)
-semilogy(f(1:N_f_max), abs(X_rows(1,1:N_f_max)));
+semilogy(f_row(1:N_f_max), abs(X_rows(1,1:N_f_max)));
 axis tight
 grid on
 set(gca,'XTickLabel',[]);
 ylabel('$\left|X_{1}(f)\right|$', 'interpreter', 'latex');
 
 subplot(3,2,3)
-plot(t, y_rows(1,:));
+plot(t_row, y_rows(1,:));
 xlim([-0.5,T])
 set(gca,'XTickLabel',[]);
 ylabel('$y_{1}(t)$', 'interpreter', 'latex');
 
 subplot(3,2,4)
-semilogy(f(1:N_f_max), abs(Y_rows(1,1:N_f_max)));
+semilogy(f_row(1:N_f_max), abs(Y_rows(1,1:N_f_max)));
 axis tight
 grid on
 set(gca,'XTickLabel',[]);
@@ -58,29 +58,26 @@ ylabel('$\left|Y_{1}(f)\right|$', 'interpreter', 'latex');
 
 %Plot h_raw & H_raw
 subplot(3,2,5);
-plot(t, h_raw);
+plot(t_row, h_raw);
 xlim([-0.5,T])
 xlabel('$t$ (s)', 'interpreter', 'latex');
 ylabel('$h_{\mathrm{raw}}(t)$', 'interpreter', 'latex');
 
 subplot(3,2,6);
-semilogy(f(1:N_f_max),abs(H_raw(1:N_f_max)));
+semilogy(f_row(1:N_f_max),abs(H_raw(1:N_f_max)));
 axis tight
 grid on
 xlabel('$f$ (Hz)', 'interpreter', 'latex');
 ylabel('$\left|H_{\mathrm{raw}}(f)\right|$', 'interpreter', 'latex');
 
-
-%Plot H_raw beside H_1 estimator
+%Plot H_raw and H_1 estimator
 figure
 ax_mag_h=subplot(4,1,[1:3]);hold on;axis tight
 ax_phase_h=subplot(4,1,4);hold on;axis tight
-plot_FRF_mag_phase(f(1:N_f_max),H_raw(1:N_f_max),false,ax_mag_h,ax_phase_h,[]);
-plot_FRF_mag_phase(f(1:N_f_max),H_1(1:N_f_max),false,ax_mag_h,ax_phase_h,[]);
+plot_FRF_mag_phase(f_row(1:N_f_max),H_raw(1:N_f_max),false,ax_mag_h,ax_phase_h,[]);
+plot_FRF_mag_phase(f_row(1:N_f_max),H_1(1:N_f_max),false,ax_mag_h,ax_phase_h,[]);
 legend(ax_mag_h,{'$\left|H_{\mathrm{raw}}(f)\right|$','$\left|\hat{H}_{1}(f)\right|$'}, 'interpreter', 'latex')
 legend(ax_phase_h,{'$\angle \left(H_{\mathrm{raw}}(f)\right)$','$\angle \left(\hat{H}_{1}(f)\right)$'}, 'interpreter', 'latex')
-
-
 
 set(groot,'DefaultLineLineWidth','remove');
 

@@ -64,8 +64,8 @@ X_xlabel_Latex='$f/f_{\mathrm{s}}$';
 x_Title_Latex=cell(N_N_avg,1);
 X_Title_Latex=cell(N_N_avg,1);
 for ii=1:N_N_avg
-    x_Title_Latex{ii}=['$E[x(t)]$,: $N = ',int2str(N),'$ \& $N_{\mathrm{avg}} = ',int2str(N_avg_vec(ii)), '$'];
-    X_Title_Latex{ii}=['$|E[X(f)]|$,: $N = ',int2str(N),'$ \& $N_{\mathrm{avg}} = ',int2str(N_avg_vec(ii)), '$'];
+    x_Title_Latex{ii}=['$E[x(t)]$,: $N=',int2str(N),'$ \& $N_{\mathrm{avg}}=',int2str(N_avg_vec(ii)), '$'];
+    X_Title_Latex{ii}=['$|E[X(f)]|$,: $N=',int2str(N),'$ \& $N_{\mathrm{avg}}=',int2str(N_avg_vec(ii)), '$'];
 end
 X_VeticalLines=(f_c/2)/f_s_pad;
 VerticalLinesTextLatex={'${\displaystyle f_{\mathrm{c}} / f_{\mathrm{s}}}$'};
@@ -75,8 +75,8 @@ f_autoCorr1=figure;maximizeFigure(f_autoCorr1);
 x_xlabel_Latex='$\tau/T^{\mathrm{pad}}$ ,:$T^{\mathrm{pad}}=N^{\mathrm{pad}} / N \times T$';
 X_xlabel_Latex='$f/f_{\mathrm{s}}^{\mathrm{pad}}$ ,:$f_{\mathrm{s}}^{\mathrm{pad}}=f_{\mathrm{s}}$';
 for ii=1:N_N_avg
-    x_Title_Latex{ii}=['$r_{xx}^{\mathrm{pad}}(\tau)$ (@ $\Delta t^{\mathrm{pad}} = \Delta t$), $N^{\mathrm{pad}} = ',int2str(N_pad),'$ \& $N_{\mathrm{avg}} = ',int2str(N_avg_vec(ii)), '$'];
-    X_Title_Latex{ii}=['$R_{XX}^{\mathrm{pad}}(f)$ (@$\Delta f^{\mathrm{pad}}=N/N^{\mathrm{pad}} \times \Delta f$), $N^{\mathrm{pad}} = ',int2str(N_pad),'$ \& $N_{\mathrm{avg}} = ',int2str(N_avg_vec(ii)), '$'];
+    x_Title_Latex{ii}=['$r_{xx}^{\mathrm{pad}}(\tau)$ (@ $\Delta t^{\mathrm{pad}}=\Delta t$), $N^{\mathrm{pad}}=',int2str(N_pad),'$ \& $N_{\mathrm{avg}}=',int2str(N_avg_vec(ii)), '$'];
+    X_Title_Latex{ii}=['$R_{XX}^{\mathrm{pad}}(f)$ (@$\Delta f^{\mathrm{pad}}=N/N^{\mathrm{pad}} \times \Delta f$), $N^{\mathrm{pad}}=',int2str(N_pad),'$ \& $N_{\mathrm{avg}}=',int2str(N_avg_vec(ii)), '$'];
 end
 signal_variance_row=r_nn_padded_cols(1,:);
 y_HorizontalLines=signal_variance_row;
@@ -93,8 +93,8 @@ f_autoCorr2=figure;maximizeFigure(f_autoCorr2);
 x_xlabel_Latex='$\tau/T$  ,:$T^{\mathrm{pad}}=N^{\mathrm{pad}} / N \times T$';
 X_xlabel_Latex='$f/f_{\mathrm{s}}$  ,:$f_{\mathrm{s}}^{\mathrm{pad}}=f_{\mathrm{s}}$';
 for ii=1:N_N_avg
-    x_Title_Latex{ii}=['$r_{xx}^{\mathrm{pad}}(\tau)$ (@ $\Delta t^{\mathrm{pad}} = \Delta t$), $N = ',int2str(N),'$ \& $N_{\mathrm{avg}} = ',int2str(N_avg_vec(ii)), '$'];
-    X_Title_Latex{ii}=['$R_{XX}^{\mathrm{pad}}(f)$ (@$\Delta f^{\mathrm{pad}}=N/N^{\mathrm{pad}} \times \Delta f$), $N = ',int2str(N),'$ \& $N_{\mathrm{avg}} = ',int2str(N_avg_vec(ii)), '$'];
+    x_Title_Latex{ii}=['$r_{xx}^{\mathrm{pad}}(\tau)$ (@ $\Delta t^{\mathrm{pad}}=\Delta t$), $N=',int2str(N),'$ \& $N_{\mathrm{avg}}=',int2str(N_avg_vec(ii)), '$'];
+    X_Title_Latex{ii}=['$R_{XX}^{\mathrm{pad}}(f)$ (@$\Delta f^{\mathrm{pad}}=N/N^{\mathrm{pad}} \times \Delta f$), $N=',int2str(N),'$ \& $N_{\mathrm{avg}}=',int2str(N_avg_vec(ii)), '$'];
 end
 x_VeticalLines=[];
 verticalLinesTextLatex={};

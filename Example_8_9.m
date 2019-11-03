@@ -14,7 +14,7 @@ T=500*D_2_1;    %100 sec
 rng(0);
 s_vec=randn(1,K_temp);
 f_c=f_s/5;  %100 Hz
-[b,a] = butter(9,f_c/(f_s/2));s_vec=filtfilt(b,a,s_vec);
+[b,a]=butter(9,f_c/(f_s/2));s_vec=filtfilt(b,a,s_vec);
 s_vec=s_vec-mean(s_vec); s_vec=s_vec/std(s_vec); % Makes mean(s)=0 & std(s)=1;
 
 T_start=D_2_1;
@@ -27,7 +27,7 @@ K=K_temp-k_start;
 rng(1);x_vec=x_vec+std(x_vec)*randn(1,K)/SNR_x;
 rng(2);y_vec=y_vec+std(y_vec)*randn(1,K)/SNR_y; 
 
-kappa_max=5*D_2_1/D_t;    %kappa_max at tau=5*D_2_1=1 sec. = T/100
+kappa_max=5*D_2_1/D_t;    %kappa_max at tau=5*D_2_1=1 sec.=T/100
 r_xx=xcorr(x_vec,x_vec,kappa_max,'unbiased');
 r_xy=xcorr(y_vec,x_vec,kappa_max,'unbiased');
 
