@@ -32,9 +32,6 @@ x_tot_col=x_tot_col+std(x_tot_col)/SNR*randn(size(x_tot_col));
 
 %Periodogram Estimator
 R_XX_Matlab=periodogram(x_tot_col(1:K),[],N,f_s,'twosided')*f_s;  %Matlab Periodogram implementation
-R_XX_our=ourPeriodogram(x_tot_col(1:K),x_tot_col(1:K));   %Our Periodogram implementation
-Error=max(abs(R_XX_our-R_XX_Matlab))
-if abs(Error)>200*eps,warning('Differnce between ourPeriodogram and Matlab''s periodogram is large!!!'),end
 semilogy(f_col,R_XX_Matlab);
 hold on
 
@@ -42,9 +39,6 @@ hold on
 win_col=hann(K);
 %win_col=ones(K,1);
 R_XX_Matlab=periodogram(x_tot_col(1:K),win_col,N,f_s,'twosided')*f_s;  %Matlab Periodogram implementation
-R_XX_our=ourPeriodogram(x_tot_col(1:K),x_tot_col(1:K),win_col);   %Our Periodogram implementation
-Error=max(abs(R_XX_our-R_XX_Matlab))
-if abs(Error)>200*eps,warning('Differnce between ourPeriodogram and Matlab''s periodogram is large!!!'),end
 semilogy(f_col,R_XX_Matlab);
 
 %Welch (averaged) cpsd estimation
