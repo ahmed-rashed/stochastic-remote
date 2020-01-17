@@ -45,9 +45,9 @@ legend_str=cell(N_SNR,1);
 for s_fn=s_fn_cvec
     figure
     x_ax=subplot(3,1,1);
-    hold on
+    hold on;
     set(x_ax,'XGrid','on','YLimSpec','tight','XTickLabel',[])
-    ylabel(x_ax,'$\hat{x}(t)$','interpreter','latex')
+    ylabel(x_ax,'$x(t)$','interpreter','latex')
     %Additional optimization of the axes for correct comparison with the correlation curves
     pos=get(x_ax,'Position');
     pos(1)=pos(1)+pos(3)/2;
@@ -72,6 +72,11 @@ for s_fn=s_fn_cvec
     ylabel(r_xy_hat_ax,'$r_{x\hat{y}}(\tau)$','interpreter','latex')
     xlabel(r_xy_hat_ax,'$\tau$ (s)','interpreter','latex')
 
+    x_vec=signalPulse(t_vec,T_burst,s_fn{1});
+    plot(x_ax,t_vec,x_vec,'LineWidth',1.5)
+    
+    y_vec=x_vec+alpha*signalPulse(t_vec-T_echo,T_burst,s_fn{1});
+
     for ii=1:N_SNR
         if SNR_vec(ii)==inf
             legend_str{ii}='$\mathrm{SNR}=\infty$';
@@ -80,20 +85,15 @@ for s_fn=s_fn_cvec
             legend_str{ii}=['$\mathrm{SNR}=',num2str(SNR_vec(ii)),'$'];
             line_width=1;
         end
-        
-        x_vec=signalPulse(t_vec,T_burst,s_fn{1});
-        y_vec=x_vec+alpha*signalPulse(t_vec-T_echo,T_burst,s_fn{1});
 
         rng(1);
-        x_hat_vec=addNoise(x_vec,SNR_vec(ii));
         y_hat_vec=addNoise(y_vec,SNR_vec(ii));
         r_x_y_hat=xcorr(y_hat_vec,x_vec); %unscaled linear cross-correlation
 
-        plot(x_ax,t_vec,x_hat_vec,'LineWidth',line_width)
         plot(y_ax,t_vec,y_hat_vec,'LineWidth',line_width)
         plot(r_xy_hat_ax,tau_vec,r_x_y_hat,'LineWidth',line_width)
     end
-    legend(x_ax,legend_str,'Location','southeast','interpreter','latex')
+    legend(r_xy_hat_ax,legend_str,'Location','northeast','interpreter','latex')
 end
 
 set(groot,'DefaultAxesColorOrder','remove')
