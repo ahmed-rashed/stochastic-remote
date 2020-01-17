@@ -17,7 +17,7 @@ T_burst=T/8;
 f_0=(f_s/2)/10;
 
 %x(t) and y(t) parameters
-a=1;b=.8; c=.75;
+a=1;b=.5; c=.25;
 T_1=T/4;
 T_2=3/4*T;
 
