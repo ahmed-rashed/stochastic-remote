@@ -8,15 +8,15 @@ set(groot,'DefaultAxesColorOrder',[1,0,0;0,0,1;0,0.5,0;1,0,1;0,0,0])
 T=4;
 K=2^10; %K=1024
 [Delta_t,f_s,D_f]=samplingParameters_T_N(T,K);
-t_vec=(0:K-1)*Delta_t;
-tau_vec=(-(K-1):K-1)*Delta_t;
+t_row=(0:K-1)*Delta_t;
+tau_row=(-(K-1):K-1)*Delta_t;
 
 %x(t) parameters
 T_burst=T/8;
 
 %y(t) parameters
-alpha=.2;
-T_echo=2*T_burst;
+alpha_col=[.2;.1;.2;.1];
+T_echo_col=[2;4;6;6.5]*T_burst;
 
 %Tone and Chirp signal parameters
 f_0=f_s/24;
@@ -72,10 +72,10 @@ for s_fn=s_fn_cvec
     ylabel(r_xy_hat_ax,'$r_{x\hat{y}}(\tau)$','interpreter','latex')
     xlabel(r_xy_hat_ax,'$\tau$ (s)','interpreter','latex')
 
-    x_vec=signalPulse(t_vec,T_burst,s_fn{1});
-    plot(x_ax,t_vec,x_vec,'LineWidth',1.5)
+    x_row=signalPulse(t_row,T_burst,s_fn{1});
+    plot(x_ax,t_row,x_row,'LineWidth',1.5)
     
-    y_vec=x_vec+alpha*signalPulse(t_vec-T_echo,T_burst,s_fn{1});
+    y_row=x_row+sum(alpha_col.*signalPulse(t_row-T_echo_col,T_burst,s_fn{1}),1);
 
     for ii=1:N_SNR
         if SNR_vec(ii)==inf
@@ -87,13 +87,13 @@ for s_fn=s_fn_cvec
         end
 
         rng(1);
-        y_hat_vec=addNoise(y_vec,SNR_vec(ii));
-        r_x_y_hat=xcorr(y_hat_vec,x_vec); %unscaled linear cross-correlation
+        y_hat_row=addNoise(y_row,SNR_vec(ii));
+        r_x_y_hat=xcorr(y_hat_row,x_row); %unscaled linear cross-correlation
 
-        plot(y_ax,t_vec,y_hat_vec,'LineWidth',line_width)
-        plot(r_xy_hat_ax,tau_vec,r_x_y_hat,'LineWidth',line_width)
+        plot(y_ax,t_row,y_hat_row,'LineWidth',line_width)
+        plot(r_xy_hat_ax,tau_row,r_x_y_hat,'LineWidth',line_width)
     end
-    legend(r_xy_hat_ax,legend_str,'Location','northeast','interpreter','latex')
+    legend(y_ax,legend_str,'Location','southeast','interpreter','latex')
 end
 
 set(groot,'DefaultAxesColorOrder','remove')
