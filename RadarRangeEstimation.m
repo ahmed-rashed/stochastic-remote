@@ -36,17 +36,22 @@ x_rnd=x_rnd-mean(x_rnd);
 x_rnd=x_rnd/std(x_rnd); % Makes mean(s)=0 & std(s)=1;
 
 s_fn_cvec={@(t) (cos(2*pi*f_0*t)),@(t) (cos(2*pi*f_0*t-pi).*(1+cos(2*pi*t/T_burst-pi))),@(t) (chirp(t,f_0,T_1,f_1)),@(t) (interp1(t_rnd_vec,x_rnd,t,'linear',0))};
+s_title_cvec={'Harmonic pulse','Hann-weighted harmonic pulse','LFM pulse','Transient pulse'};
 
 SNR_vec=[1/2,inf];
 
 N_SNR=length(SNR_vec);
 legend_str=cell(N_SNR,1);
 
+iii=1;
 for s_fn=s_fn_cvec
+    x_row=signalPulse(t_row,T_burst,s_fn{1});
+    
     figure
     x_ax=subplot(3,1,1);
-    hold on;
-    set(x_ax,'XGrid','on','YLimSpec','tight','XTickLabel',[])
+    plot(t_row/T,x_row,'LineWidth',1.5)
+    set(x_ax,'XGrid','on','XTick',0:.2:1,'XTickLabel',[],'XLim',[0,1],'YLimSpec','tight')
+    title(s_title_cvec{iii})
     ylabel(x_ax,'$x(t)$','interpreter','latex')
     %Additional optimization of the axes for correct comparison with the correlation curves
     pos=get(x_ax,'Position');
@@ -56,9 +61,9 @@ for s_fn=s_fn_cvec
 
     y_ax=subplot(3,1,2);
     hold on
-    set(y_ax,'XGrid','on','YLimSpec','tight','XTickLabel',[])
+    set(y_ax,'XGrid','on','XTick',0:.2:1,'XTickLabel',[],'XLim',[0,1],'YLimSpec','tight')
     ylabel(y_ax,'$\hat{y}(t)$','interpreter','latex')
-    xlabel(y_ax,'$t$ (s)','interpreter','latex');
+    xlabel(y_ax,'$t/T$','interpreter','latex');
     %Additional optimization of the axes for correct comparison with the correlation curves
     pos=get(y_ax,'Position');
     pos(1)=pos(1)+pos(3)/2;
@@ -68,12 +73,9 @@ for s_fn=s_fn_cvec
     r_xy_hat_ax=subplot(3,1,3);
     hold on;
     set(r_xy_hat_ax,'XGrid','on')
-    set(r_xy_hat_ax,'YLimSpec','tight')
+    set(r_xy_hat_ax,'XTick',-1:.2:1,'XLim',[-1,1],'YLimSpec','tight')
     ylabel(r_xy_hat_ax,'$r_{x\hat{y}}(\tau)$','interpreter','latex')
-    xlabel(r_xy_hat_ax,'$\tau$ (s)','interpreter','latex')
-
-    x_row=signalPulse(t_row,T_burst,s_fn{1});
-    plot(x_ax,t_row,x_row,'LineWidth',1.5)
+    xlabel(r_xy_hat_ax,'$\tau/T$','interpreter','latex')
     
     y_row=x_row+sum(alpha_col.*signalPulse(t_row-T_echo_col,T_burst,s_fn{1}),1);
 
@@ -88,14 +90,16 @@ for s_fn=s_fn_cvec
 
         rng(1);
         y_hat_row=addNoise(y_row,SNR_vec(ii));
+        plot(y_ax,t_row/T,y_hat_row,'LineWidth',line_width)
+        
         r_x_y_hat=xcorr(y_hat_row,x_row); %unscaled linear cross-correlation
-
-        plot(y_ax,t_row,y_hat_row,'LineWidth',line_width)
-        plot(r_xy_hat_ax,tau_row,r_x_y_hat,'LineWidth',line_width)
+        plot(r_xy_hat_ax,tau_row/T,r_x_y_hat,'LineWidth',line_width)
     end
     legend(y_ax,legend_str,'Location','southeast','interpreter','latex')
+    
+    iii=iii+1;
 end
 
 set(groot,'DefaultAxesColorOrder','remove')
 
-% export_figure(gcf,'==',{'Echo_Correlation'})
+export_figure(1:4,'==',{'HarmonicPulseRadar','WeightedHarmonicPulseRadar','LFM_PulseCompressionRadar','RandomPulseRadar'})
