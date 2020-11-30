@@ -11,7 +11,7 @@ X=fft(x);
 Y=fft(y);
 
 R_XY=Y.*conj(X)/N;
-[Pxy,F]=cpsd(x,y,ones(size(x)),0,N, 'twosided');
+[Pxy,F]=cpsd(x,y,ones(size(x)),0,N,'twosided');
 n_max=length(Pxy);
 
 f=linspace(0,1,N);

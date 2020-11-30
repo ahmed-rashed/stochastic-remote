@@ -16,6 +16,6 @@ Y_Ax_TickLabels(7)={'1'};
 axis([1,13,-.05,1.05])
 set(gca,'XTick',[2:12],'YTick',[0:6:36]/36,'YTickLabel',Y_Ax_TickLabels)
 grid on
-xlabel('$x$', 'interpreter', 'latex')
-title('$P(x)$', 'interpreter', 'latex')
+xlabel('$x$','interpreter','latex')
+title('$P(x)$','interpreter','latex')
 export_figure(gcf,'',{'Dice_ProbDist'})

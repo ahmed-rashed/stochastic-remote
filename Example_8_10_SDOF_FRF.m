@@ -31,15 +31,15 @@ tau_vec=(-kappa_max:kappa_max)*Delta_t;
 figure
 subplot(3,1,1)
 plot(tau_vec,r_xx_lin)
-xlabel('$\tau$','interpreter', 'latex'); ylabel('$r_{xx}(\tau)$','interpreter', 'latex')
+xlabel('$\tau$','interpreter','latex'); ylabel('$r_{xx}(\tau)$','interpreter','latex')
 
 subplot(3,1,2)
 plot(tau_vec,r_yy_lin)
-xlabel('$\tau$','interpreter', 'latex'); ylabel('$r_{yy}(\tau)$','interpreter', 'latex')
+xlabel('$\tau$','interpreter','latex'); ylabel('$r_{yy}(\tau)$','interpreter','latex')
 
 subplot(3,1,3)
 plot(tau_vec,r_xy_lin)
-xlabel('$\tau$','interpreter', 'latex'); ylabel('$r_{xy}(\tau)$','interpreter', 'latex')
+xlabel('$\tau$','interpreter','latex'); ylabel('$r_{xy}(\tau)$','interpreter','latex')
 
 N_z=2*kappa_max;
 T_z=2*T;
@@ -55,61 +55,61 @@ H_exact=fft(h_exact_vec,N_z)/fs;
 
 figure
 subplot(3,1,1:2)
-plot(f_pad(1:N), 20*log10(abs(H_exact(1:N))),f_pad(1:N), 20*log10(abs(H1(1:N))),'r');
-xlabel('$f$ (Hz)','interpreter', 'latex');
-ylabel('$|H(f)|$ (dB)','interpreter', 'latex')
+plot(f_pad(1:N),20*log10(abs(H_exact(1:N))),f_pad(1:N),20*log10(abs(H1(1:N))),'r');
+xlabel('$f$ (Hz)','interpreter','latex');
+ylabel('$|H(f)|$ (dB)','interpreter','latex')
 legend({'$H(f)$','$H_{1}^{\mathrm{lin corr}}$'},'interpreter','latex')
 
 subplot(3,1,3)
-plot(f_pad(1:N), unwrap(angle(H_exact(1:N))),f_pad(1:N), unwrap(angle(H1(1:N))),'r');
-xlabel('$f$ (Hz)','interpreter', 'latex');
-ylabel('$\angle H(f)$ (rad)','interpreter', 'latex')
+plot(f_pad(1:N),unwrap(angle(H_exact(1:N))),f_pad(1:N),unwrap(angle(H1(1:N))),'r');
+xlabel('$f$ (Hz)','interpreter','latex');
+ylabel('$\angle H(f)$ (rad)','interpreter','latex')
 legend({'$H(f)$','$H_{1}^{\mathrm{lin corr}}$'},'interpreter','latex')
 
 %% Comments 1 (use T=2000) %%
 
 % figure
 % plot(t_row,4*h_exact_vec); hold on
-% plot(tau_vec(kappa_max+1:end), r_xy_lin(kappa_max+1:end), 'r:'); hold off
+% plot(tau_vec(kappa_max+1:end),r_xy_lin(kappa_max+1:end),'r:'); hold off
 % xlabel('Time (s) and lag (\it\tau\rm)'); ylabel('Amplitude')
 % 
 % figure
 % Rhh=xcorr(h_exact_vec,h_exact_vec,kappa_max);
 % plot(tau_vec,4*Rhh); hold on
-% plot(tau_vec, r_yy_lin, 'r:'); hold off
+% plot(tau_vec,r_yy_lin,'r:'); hold off
 % xlabel('Lag (\it\tau\rm)'); ylabel('Amplitude')
 
 %% Comments 2 (use T=100) %%
-Sxx_circ_Corr=cpsd(x_long_row,x_long_row,ones([1,NN]),0,N_z, fs, 'twosided');
-Sxy_circ_Corr=cpsd(y_long_row,x_long_row, ones([1,NN]),0, N_z, fs, 'twosided');
+Sxx_circ_Corr=cpsd(x_long_row,x_long_row,ones([1,NN]),0,N_z,fs,'twosided');
+Sxy_circ_Corr=cpsd(y_long_row,x_long_row,ones([1,NN]),0,N_z,fs,'twosided');
 H1_circ_Corr=Sxy_circ_Corr./Sxx_circ_Corr;
 
 figure
 subplot(3,1,1:2)
-plot(f_pad(1:N), 20*log10(abs(H1_circ_Corr(1:N))),f_pad(1:N), 20*log10(abs(H1(1:N))), 'r');
-xlabel('$f$ (Hz)','interpreter', 'latex');
-ylabel('$|H(f)|$ (dB)','interpreter', 'latex')
+plot(f_pad(1:N),20*log10(abs(H1_circ_Corr(1:N))),f_pad(1:N),20*log10(abs(H1(1:N))),'r');
+xlabel('$f$ (Hz)','interpreter','latex');
+ylabel('$|H(f)|$ (dB)','interpreter','latex')
 legend({'$H_{1}^{\mathrm{circ corr}}$','$H_{1}^{\mathrm{lin corr}}$'},'interpreter','latex')
 
 subplot(3,1,3)
-plot(f_pad(1:N), unwrap(angle(H1_circ_Corr(1:N))),f_pad(1:N), unwrap(angle(H1(1:N))), 'r'); hold on;set(gca,'ColorOrderIndex',1);
-xlabel('$f$ (Hz)','interpreter', 'latex');
-ylabel('$\angle H(f)$ (rad)','interpreter', 'latex')
+plot(f_pad(1:N),unwrap(angle(H1_circ_Corr(1:N))),f_pad(1:N),unwrap(angle(H1(1:N))),'r'); hold on;set(gca,'ColorOrderIndex',1);
+xlabel('$f$ (Hz)','interpreter','latex');
+ylabel('$\angle H(f)$ (rad)','interpreter','latex')
 legend({'$H_{1}^{\mathrm{circ corr}}$','$H_{1}^{\mathrm{lin corr}}$'},'interpreter','latex')
 
-Sxx_w=cpsd(x_long_row,x_long_row, hanning(N_z),N_z/2, N_z, fs, 'twosided');
-Sxy_w=cpsd(y_long_row,x_long_row, hanning(N_z),N_z/2, N_z, fs, 'twosided');
+Sxx_w=cpsd(x_long_row,x_long_row,hanning(N_z),N_z/2,N_z,fs,'twosided');
+Sxy_w=cpsd(y_long_row,x_long_row,hanning(N_z),N_z/2,N_z,fs,'twosided');
 H1_w=Sxy_w./Sxx_w;
 
 figure
 subplot(3,1,1:2)
-plot(f_pad(1:N), 20*log10(abs(H1_w(1:N))),f_pad(1:N), 20*log10(abs(H1(1:N))), 'r');
-xlabel('$f$ (Hz)','interpreter', 'latex');
-ylabel('$|H(f)|$ (dB)','interpreter', 'latex')
+plot(f_pad(1:N),20*log10(abs(H1_w(1:N))),f_pad(1:N),20*log10(abs(H1(1:N))),'r');
+xlabel('$f$ (Hz)','interpreter','latex');
+ylabel('$|H(f)|$ (dB)','interpreter','latex')
 legend({'$H_{1}^{\mathrm{Welch}}$','$H_{1}^{\mathrm{lin corr}}$'},'interpreter','latex')
 
 subplot(3,1,3)
-plot(f_pad(1:N), unwrap(angle(H1_w(1:N))),f_pad(1:N), unwrap(angle(H1(1:N))), 'r'); hold on;set(gca,'ColorOrderIndex',1);
-xlabel('$f$ (Hz)','interpreter', 'latex');
-ylabel('$\angle H(f)$ (rad)','interpreter', 'latex')
+plot(f_pad(1:N),unwrap(angle(H1_w(1:N))),f_pad(1:N),unwrap(angle(H1(1:N))),'r'); hold on;set(gca,'ColorOrderIndex',1);
+xlabel('$f$ (Hz)','interpreter','latex');
+ylabel('$\angle H(f)$ (rad)','interpreter','latex')
 legend({'$H_{1}^{\mathrm{Welch}}$','$H_{1}^{\mathrm{lin corr}}$'},'interpreter','latex')

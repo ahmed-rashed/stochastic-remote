@@ -14,9 +14,9 @@ N=K;
 f_col=(0:N-1).'*D_f;
 %f_col_half=(0:floor(N/2)).'*D_f;
 
-R_XX=cpsd(x,x, hanning(K),K/2, K, f_s,'twosided');
-R_YY=cpsd(y,y, hanning(K),K/2, K, f_s,'twosided');
-R_XY=cpsd(y,x, hanning(K),K/2, K, f_s,'twosided');
+R_XX=cpsd(x,x,hanning(K),K/2,K,f_s,'twosided');
+R_YY=cpsd(y,y,hanning(K),K/2,K,f_s,'twosided');
+R_XY=cpsd(y,x,hanning(K),K/2,K,f_s,'twosided');
 R_YX=conj(R_XY);
 
 figure;

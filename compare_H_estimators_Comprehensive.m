@@ -24,81 +24,81 @@ x_fig=figure;
 y_fig=figure;
 for n=1:N_avg
     figure(x_fig);h_x=subplot(N_avg,2,2*n-1);
-    plot(t, x_rows(n,:));
+    plot(t,x_rows(n,:));
     axis tight
     xlim([-0.5,T])
-    ylabel(['$x_{',int2str(n),'}(t)$'], 'interpreter', 'latex');
+    ylabel(['$x_{',int2str(n),'}(t)$'],'interpreter','latex');
     
     figure(x_fig);h_y=subplot(N_avg,2,2*n);
-    semilogy(f(1:N_f_max), abs(X_rows(n,1:N_f_max)));
+    semilogy(f(1:N_f_max),abs(X_rows(n,1:N_f_max)));
     axis tight
-    ylabel(['$\left|X_{',int2str(n),'}(f)\right|$'], 'interpreter', 'latex');
+    ylabel(['$\left|X_{',int2str(n),'}(f)\right|$'],'interpreter','latex');
 
     if n~=N_avg
         set(h_x,'XTickLabel',[]);
         set(h_y,'XTickLabel',[]);
     else
-        xlabel(h_x,'$t$ (s)', 'interpreter', 'latex');
-        xlabel(h_y,'$f$ (Hz)', 'interpreter', 'latex');
+        xlabel(h_x,'$t$ (s)','interpreter','latex');
+        xlabel(h_y,'$f$ (Hz)','interpreter','latex');
     end
     
     figure(y_fig);h_x=subplot(N_avg,2,2*n-1);
-    plot(t, y_rows(n,:));
+    plot(t,y_rows(n,:));
     axis tight
     xlim([-0.5,T])
-    ylabel(['$y_{',int2str(n),'}(t)$'], 'interpreter', 'latex');
+    ylabel(['$y_{',int2str(n),'}(t)$'],'interpreter','latex');
     
     figure(y_fig);h_y=subplot(N_avg,2,2*n);
-    semilogy(f(1:N_f_max), abs(Y_rows(n,1:N_f_max)));
+    semilogy(f(1:N_f_max),abs(Y_rows(n,1:N_f_max)));
     axis tight
-    ylabel(['$\left|Y_{',int2str(n),'}(f)\right|$'], 'interpreter', 'latex');
+    ylabel(['$\left|Y_{',int2str(n),'}(f)\right|$'],'interpreter','latex');
 
     if n~=N_avg
         set(h_x,'XTickLabel',[]);
         set(h_y,'XTickLabel',[]);
     else
-        xlabel(h_x,'$t$ (s)', 'interpreter', 'latex');
-        xlabel(h_y,'$f$ (Hz)', 'interpreter', 'latex');
+        xlabel(h_x,'$t$ (s)','interpreter','latex');
+        xlabel(h_y,'$f$ (Hz)','interpreter','latex');
     end
 end
 
 figure
 subplot(3,2,1)
-plot(t, x_rows(1,:));
-xlabel('$t$ (s)', 'interpreter', 'latex');
+plot(t,x_rows(1,:));
+xlabel('$t$ (s)','interpreter','latex');
 xlim([-0.5,T])
-ylabel('$x_{n}(t)$', 'interpreter', 'latex');
+ylabel('$x_{n}(t)$','interpreter','latex');
 
 subplot(3,2,2)
-semilogy(f(1:N_f_max), abs(X_rows(1,1:N_f_max)));
-xlabel('$f$ (Hz)', 'interpreter', 'latex');
-ylabel('$\left|X_{n}(f)\right|$', 'interpreter', 'latex');
+semilogy(f(1:N_f_max),abs(X_rows(1,1:N_f_max)));
+xlabel('$f$ (Hz)','interpreter','latex');
+ylabel('$\left|X_{n}(f)\right|$','interpreter','latex');
 
 subplot(3,2,3)
-plot(t, y_rows(1,:));
+plot(t,y_rows(1,:));
 xlim([-0.5,T])
-xlabel('$t$ (s)', 'interpreter', 'latex');
-ylabel('$y_{n}(t)$', 'interpreter', 'latex');
+xlabel('$t$ (s)','interpreter','latex');
+ylabel('$y_{n}(t)$','interpreter','latex');
 
 subplot(3,2,4)
-semilogy(f(1:N_f_max), abs(Y_rows(1,1:N_f_max)));
-xlabel('$f$ (Hz)', 'interpreter', 'latex');
-ylabel('$\left|Y_{n}(f)\right|$', 'interpreter', 'latex');
+semilogy(f(1:N_f_max),abs(Y_rows(1,1:N_f_max)));
+xlabel('$f$ (Hz)','interpreter','latex');
+ylabel('$\left|Y_{n}(f)\right|$','interpreter','latex');
 
 %Raw H estimator
 H_raw=Y_rows(1,:)./X_rows(1,:);
 h_raw=ifft(H_raw);
 
 subplot(3,2,5);
-plot(t, h_raw);
+plot(t,h_raw);
 xlim([-0.5,T])
-xlabel('$t$ (s)', 'interpreter', 'latex');
-ylabel('$h_{\mathrm{raw}}(t)$', 'interpreter', 'latex');
+xlabel('$t$ (s)','interpreter','latex');
+ylabel('$h_{\mathrm{raw}}(t)$','interpreter','latex');
 
 subplot(3,2,6);
 semilogy(f(1:N_f_max),abs(H_raw(1:N_f_max)));
-xlabel('$f$ (Hz)', 'interpreter', 'latex');
-ylabel('$H_{\mathrm{raw}}$', 'interpreter', 'latex');
+xlabel('$f$ (Hz)','interpreter','latex');
+ylabel('$H_{\mathrm{raw}}$','interpreter','latex');
 
 
 %H1 estimator

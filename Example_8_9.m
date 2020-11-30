@@ -32,16 +32,16 @@ r_xx=xcorr(x_vec,x_vec,kappa_max,'unbiased');
 r_xy=xcorr(y_vec,x_vec,kappa_max,'unbiased');
 
 f=(0:kappa_max-1)*f_s/kappa_max;    %Why discard the -ve tau part?
-S_xy=fft(r_xy(kappa_max+1:end-1));  %Why S_xy is calculated here using fft, while in 9.3 it is calculated using cpsd?
+S_xy=fft(r_xy(kappa_max+1:end-1));  %Why S_xy is calculated here using fft,while in 9.3 it is calculated using cpsd?
 
 subplot(2,1,1)
 plot(f(1:kappa_max/2+1),unwrap(angle(S_xy(1:kappa_max/2+1))))
-xlabel('$f$ (Hz)', 'interpreter', 'latex')
-ylabel('$\angle S_{xy}(f)$ (rad)', 'interpreter', 'latex');
+xlabel('$f$ (Hz)','interpreter','latex')
+ylabel('$\angle S_{xy}(f)$ (rad)','interpreter','latex');
 
 ind=find(f==f_c);
 P1=polyfit(f(2:ind),unwrap(angle(S_xy(2:ind))),1);
-hold on;plot(f(2:ind), P1(1)*f(2:ind)+P1(2));
+hold on;plot(f(2:ind),P1(1)*f(2:ind)+P1(2));
 t_delay1=-P1(1)/(2*pi)
 
 N=2*kappa_max;
@@ -56,9 +56,9 @@ H1=S_xy./S_xx;
 
 subplot(2,1,2)
 plot(f(1:kappa_max+1),unwrap(angle(H1(1:kappa_max+1))))
-xlabel('$f$ (Hz)', 'interpreter', 'latex')
-ylabel('$\angle H_{1}(f)$ (rad)', 'interpreter', 'latex');
+xlabel('$f$ (Hz)','interpreter','latex')
+ylabel('$\angle H_{1}(f)$ (rad)','interpreter','latex');
 
 P2=polyfit(f(2:ind),unwrap(angle(H1(2:ind))),1);
-hold on;plot(f(2:ind), P2(1)*f(2:ind)+P2(2));
+hold on;plot(f(2:ind),P2(1)*f(2:ind)+P2(2));
 t_delay2=-P2(1)/(2*pi)

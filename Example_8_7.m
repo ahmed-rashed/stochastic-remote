@@ -54,4 +54,4 @@ out=out(1:K); % or out=filter(h,1,y);
 subplot(2,1,2)
 plot(t_vec,out)
 xlabel('$t$ (s)','interpreter','latex')
-ylabel('Filtered signal, out(t)')
+ylabel('Filtered signal,out(t)')

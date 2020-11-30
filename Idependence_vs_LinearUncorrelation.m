@@ -37,9 +37,9 @@ for ii=1:3
         set(gca,'XTick',[],'YTick',[],'Box','Off')
         axis equal
         axis tight
-        xlabel('$x$', 'interpreter', 'latex', 'FontSize',8);
-        ylabel('$y$', 'interpreter', 'latex', 'FontSize',8);
-        title(['$\rho_{xy}=$',num2str(CorrCoeff_xy)], 'interpreter', 'latex', 'FontSize',8)
+        xlabel('$x$','interpreter','latex','FontSize',8);
+        ylabel('$y$','interpreter','latex','FontSize',8);
+        title(['$\rho_{xy}=$',num2str(CorrCoeff_xy)],'interpreter','latex','FontSize',8)
     end
 end
 

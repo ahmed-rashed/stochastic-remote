@@ -29,7 +29,7 @@ for n=1:N_signals
     
     ax=subplot(N_signals,4,(n-1)*4+4);
     barh(midIntervals,ProbDensity,'hist');
-    title('$p(x)$', 'interpreter', 'latex')
+    title('$p(x)$','interpreter','latex')
     xlim([0,1.1]);
     ylim(y_lims);
     ax.YAxis.MinorTickValues=equiSpacedintervals;

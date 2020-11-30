@@ -29,7 +29,7 @@ for ii=1:N_alpha_vec
     
     subplot(N_alpha_vec+1,1,ii)
     if ii==1
-        title(['Overlapped ',win_name,' windows'], 'interpreter', 'latex')
+        title(['Overlapped ',win_name,' windows'],'interpreter','latex')
     end
     if ii<=N_alpha_vec
         set(gca,'XTickLabel',[]);
@@ -55,21 +55,21 @@ for ii=1:N_alpha_vec
         win_2_eff_col(p_sig_ind)=win_2_eff_col(p_sig_ind)+win_col.^2;
         N_vec(p_sig_ind)=N_vec(p_sig_ind)+ones(K,1);
     end
-    ylabel('$w(t)$', 'interpreter', 'latex')
+    ylabel('$w(t)$','interpreter','latex')
     
     win_2_eff_col=win_2_eff_col./N_vec;
     yyaxis right
     plot(t_tot_col/T,sqrt(win_2_eff_col))
-    ylabel('$w_{\mathrm{eff}}(t)$', 'interpreter', 'latex')
+    ylabel('$w_{\mathrm{eff}}(t)$','interpreter','latex')
 
     subplot(N_alpha_vec+1,1,N_alpha_vec+1)
     plot(t_tot_col/T,N_vec)
 end
 
 subplot(N_alpha_vec+1,1,N_alpha_vec+1)
-xlabel('$t/T$', 'interpreter', 'latex')
-ylabel('$N(t)$', 'interpreter', 'latex')
-h_leg=legend(legend_str_vec, 'interpreter', 'latex','Orientation','horizontal','Units','normalized');
+xlabel('$t/T$','interpreter','latex')
+ylabel('$N(t)$','interpreter','latex')
+h_leg=legend(legend_str_vec,'interpreter','latex','Orientation','horizontal','Units','normalized');
 
 %Improve figure display
 for ii=1:N_alpha_vec
@@ -82,7 +82,7 @@ for ii=1:N_alpha_vec
     yyaxis right
     ylim(ylims)
     
-    text(.985,.9,legend_str_vec{ii},'Units','normalized','HorizontalAlignment','right','VerticalAlignment','top', 'EdgeColor',[0,0,0], 'BackgroundColor',[1,1,1], 'interpreter', 'latex')
+    text(.985,.9,legend_str_vec{ii},'Units','normalized','HorizontalAlignment','right','VerticalAlignment','top','EdgeColor',[0,0,0],'BackgroundColor',[1,1,1],'interpreter','latex')
 end
 subplot(N_alpha_vec+1,1,N_alpha_vec+1)
 xlim([0,T_max]);

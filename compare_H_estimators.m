@@ -31,44 +31,44 @@ H_1=R_XY./R_XX;
 %Plot the first measured x and y signals along with their FFT
 figure
 subplot(3,2,1)
-plot(t_row, x_rows(1,:));
+plot(t_row,x_rows(1,:));
 xlim([-0.5,T])
 set(gca,'XTickLabel',[]);
-ylabel('$x_{1}(t)$', 'interpreter', 'latex');
+ylabel('$x_{1}(t)$','interpreter','latex');
 
 subplot(3,2,2)
-semilogy(f_row(1:N_f_max), abs(X_rows(1,1:N_f_max)));
+semilogy(f_row(1:N_f_max),abs(X_rows(1,1:N_f_max)));
 axis tight
 grid on
 set(gca,'XTickLabel',[]);
-ylabel('$\left|X_{1}(f)\right|$', 'interpreter', 'latex');
+ylabel('$\left|X_{1}(f)\right|$','interpreter','latex');
 
 subplot(3,2,3)
-plot(t_row, y_rows(1,:));
+plot(t_row,y_rows(1,:));
 xlim([-0.5,T])
 set(gca,'XTickLabel',[]);
-ylabel('$y_{1}(t)$', 'interpreter', 'latex');
+ylabel('$y_{1}(t)$','interpreter','latex');
 
 subplot(3,2,4)
-semilogy(f_row(1:N_f_max), abs(Y_rows(1,1:N_f_max)));
+semilogy(f_row(1:N_f_max),abs(Y_rows(1,1:N_f_max)));
 axis tight
 grid on
 set(gca,'XTickLabel',[]);
-ylabel('$\left|Y_{1}(f)\right|$', 'interpreter', 'latex');
+ylabel('$\left|Y_{1}(f)\right|$','interpreter','latex');
 
 %Plot h_raw & H_raw
 subplot(3,2,5);
-plot(t_row, h_raw);
+plot(t_row,h_raw);
 xlim([-0.5,T])
-xlabel('$t$ (s)', 'interpreter', 'latex');
-ylabel('$h_{\mathrm{raw}}(t)$', 'interpreter', 'latex');
+xlabel('$t$ (s)','interpreter','latex');
+ylabel('$h_{\mathrm{raw}}(t)$','interpreter','latex');
 
 subplot(3,2,6);
 semilogy(f_row(1:N_f_max),abs(H_raw(1:N_f_max)));
 axis tight
 grid on
-xlabel('$f$ (Hz)', 'interpreter', 'latex');
-ylabel('$\left|H_{\mathrm{raw}}(f)\right|$', 'interpreter', 'latex');
+xlabel('$f$ (Hz)','interpreter','latex');
+ylabel('$\left|H_{\mathrm{raw}}(f)\right|$','interpreter','latex');
 
 %Plot H_raw and H_1 estimator
 figure
@@ -76,8 +76,8 @@ ax_mag_h=subplot(4,1,[1:3]);hold on;axis tight
 ax_phase_h=subplot(4,1,4);hold on;axis tight
 plot_FRF_mag_phase(f_row(1:N_f_max),H_raw(1:N_f_max),false,ax_mag_h,ax_phase_h,[]);
 plot_FRF_mag_phase(f_row(1:N_f_max),H_1(1:N_f_max),false,ax_mag_h,ax_phase_h,[]);
-legend(ax_mag_h,{'$\left|H_{\mathrm{raw}}(f)\right|$','$\left|\hat{H}_{1}(f)\right|$'}, 'interpreter', 'latex')
-legend(ax_phase_h,{'$\angle \left(H_{\mathrm{raw}}(f)\right)$','$\angle \left(\hat{H}_{1}(f)\right)$'}, 'interpreter', 'latex')
+legend(ax_mag_h,{'$\left|H_{\mathrm{raw}}(f)\right|$','$\left|\hat{H}_{1}(f)\right|$'},'interpreter','latex')
+legend(ax_phase_h,{'$\angle \left(H_{\mathrm{raw}}(f)\right)$','$\angle \left(\hat{H}_{1}(f)\right)$'},'interpreter','latex')
 
 set(groot,'DefaultLineLineWidth','remove');
 

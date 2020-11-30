@@ -63,9 +63,9 @@ for i_row=1:3
         set(ax,'Box','Off')
         axis equal
         axis tight
-        xlabel('$x$', 'interpreter', 'latex');
-        ylabel(ylabel_text, 'interpreter', 'latex');
-        title(['$\rho_{xy}=',num2str(CorrCoeff_xy),'$'], 'interpreter', 'latex')
+        xlabel('$x$','interpreter','latex');
+        ylabel(ylabel_text,'interpreter','latex');
+        title(['$\rho_{xy}=',num2str(CorrCoeff_xy),'$'],'interpreter','latex')
     end
 end
 

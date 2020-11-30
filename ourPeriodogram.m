@@ -1,4 +1,4 @@
-function R_XY_vec=ourPeriodogram(x_vec, y_vec ,win_vec)
+function R_XY_vec=ourPeriodogram(x_vec,y_vec ,win_vec)
 
 K=length(x_vec);
 if K~=numel(x_vec),error('x_vec must be a row or column vector'),end

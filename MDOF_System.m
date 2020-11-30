@@ -11,7 +11,7 @@ k=80*[100,150,100,120];
 c=2*ones(1,N+1);
 [M,C,K]=N_DOF_sys(m,c,k);
 
-[EigVectors_Normalized, EigValues_vec]=MDOF_Eig_Visc(M, C, K);
+[EigVectors_Normalized,EigValues_vec]=MDOF_Eig_Visc(M,C,K);
 
 %IRF
 n_inputs=length(j_inputs);
@@ -21,7 +21,7 @@ y_rows=zeros(n_outputs,N);
 ii_row=i_outputs;
 for n_in=1:n_inputs
     jj_row=j_inputs(n_in)*ones(1,n_outputs);
-    h_mat=MDOF_IRF_Visc(EigValues_vec, EigVectors_Normalized, t_column, ii_row, jj_row);
+    h_mat=MDOF_IRF_Visc(EigValues_vec,EigVectors_Normalized,t_column,ii_row,jj_row);
 
     for n_out=1:n_outputs
         %y_rows(n_out,:)=y_rows(n_out,:)+ifft(fft(h_mat(:,n_out)).'.*fft(x_rows(n_in,:)));

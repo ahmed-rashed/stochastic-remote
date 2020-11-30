@@ -1,4 +1,4 @@
-function R_XY_vec=our_cpsd(x_tot_vec, y_tot_vec ,win_vec ,K_o)
+function R_XY_vec=our_cpsd(x_tot_vec,y_tot_vec ,win_vec ,K_o)
 
 if any(size(x_tot_vec)~=size(y_tot_vec)),error('x_tot_vec and y_tot_vec must have the same size'),end
 if mod(K_o,1)~=0,error('N_o must be integer'),end

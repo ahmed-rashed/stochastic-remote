@@ -10,7 +10,7 @@ f_r=[5,15];
 zeta_r=[0.02,0.01];
 
 f_s=100/15*max(f_r);
-T=10;   %T and T_r should be merged in one variable called T (T_r is the notation of shin, and T is my notation)
+T=10;   %T and T_r should be merged in one variable called T (T_r is the notation of shin,and T is my notation)
 T_r=4;
 %T_r=20;
 
@@ -36,26 +36,26 @@ y_vec_long=filter(h_exact,1,x_vec_long)/f_s; %scaled appropriately.
 % x=[x 2*x 3*x 4*x 5*x]; x=x-mean(x); x=x/std(x);
 
 N_r=T_r/D_t;
-R_XX=cpsd(x_vec_long,x_vec_long, hanning(N_r),N_r/2, N_r, f_s, 'twosided')*f_s; %Welch with 50% overlap
-R_YY=cpsd(y_vec_long,y_vec_long, hanning(N_r),N_r/2, N_r, f_s, 'twosided')*f_s; %Welch with 50% overlap
-[R_XY,f]=cpsd(y_vec_long,x_vec_long, hanning(N_r),N_r/2, N_r, f_s, 'twosided'); %Welch with 50% overlap
+R_XX=cpsd(x_vec_long,x_vec_long,hanning(N_r),N_r/2,N_r,f_s,'twosided')*f_s; %Welch with 50% overlap
+R_YY=cpsd(y_vec_long,y_vec_long,hanning(N_r),N_r/2,N_r,f_s,'twosided')*f_s; %Welch with 50% overlap
+[R_XY,f]=cpsd(y_vec_long,x_vec_long,hanning(N_r),N_r/2,N_r,f_s,'twosided'); %Welch with 50% overlap
 R_XY=R_XY*f_s;
 
 figure
-semilogy(f,R_XX, f, ones(size(f)))
+semilogy(f,R_XX,f,ones(size(f)))
 xlabel('$f$ (Hz)','interpreter','latex')
 legend({'$R_{\hat{X}\hat{X}}(f)$','$R_{XX}(f)$'},'interpreter','latex')
 xlim([0,f_s/2])
 
 figure
-semilogy(f,R_YY, f_col,abs(H_DFT.^2))
+semilogy(f,R_YY,f_col,abs(H_DFT.^2))
 xlabel('$f$ (Hz)','interpreter','latex')
 legend({'$R_{\hat{Y}\hat{Y}}(f)$','$R_{YY}(f)$'},'interpreter','latex')
 xlim([0,f_s/2])
 
 figure
 [ax_mag_h,ax_phase_h]=plot_FRF_mag_phase(f,R_XY,false);
-hold(ax_mag_h, 'all');hold(ax_phase_h, 'all')
+hold(ax_mag_h,'all');hold(ax_phase_h,'all')
 plot_FRF_mag_phase(f_col,H_DFT,false,ax_mag_h,ax_phase_h,'','R_{XY}(f)');
 legend(ax_mag_h,{'$R_{\hat{X}\hat{Y}}(f)$','$R_{XY}(f)$'},'interpreter','latex')
 xlim(ax_mag_h,[0,f_s/2]);xlim(ax_phase_h,[0,f_s/2])

@@ -41,9 +41,9 @@ for nn=1:length(SNR_x)
     rng(20);
     y_noisy_vec_long=y_vec_long+std_y*randn(1,K_Tot)/SNR_y(nn);
 
-    R_XX=cpsd(x_noisy_vec_long,x_noisy_vec_long, hanning(K),K/2, K,f_s,'twosided')*f_s; %Welch with 50% overlap
-    R_YY=cpsd(y_noisy_vec_long,y_noisy_vec_long, hanning(K),K/2, K,f_s,'twosided')*f_s; %Welch with 50% overlap
-    R_XY=cpsd(y_noisy_vec_long,x_noisy_vec_long, hanning(K),K/2, K,f_s,'twosided')*f_s; %Welch with 50% overlap
+    R_XX=cpsd(x_noisy_vec_long,x_noisy_vec_long,hanning(K),K/2,K,f_s,'twosided')*f_s; %Welch with 50% overlap
+    R_YY=cpsd(y_noisy_vec_long,y_noisy_vec_long,hanning(K),K/2,K,f_s,'twosided')*f_s; %Welch with 50% overlap
+    R_XY=cpsd(y_noisy_vec_long,x_noisy_vec_long,hanning(K),K/2,K,f_s,'twosided')*f_s; %Welch with 50% overlap
     R_YX=conj(R_XY);
 
     figs(nn)=figure;
@@ -68,7 +68,7 @@ for nn=1:length(SNR_x)
     xlim(ax_phase_h,[0,f_s/2])
 
     %Comments 2:
-    [b,a]=invfreqz(H_T(1:floor(N/2)+1), 2*pi*f_col(1:floor(N/2)+1)/f_s, 4,4, [],30); 
+    [b,a]=invfreqz(H_T(1:floor(N/2)+1),2*pi*f_col(1:floor(N/2)+1)/f_s,4,4,[],30); 
     Hz=freqz(b,a,floor(N/2)+1,f_s);
     figure
     plot_FRF_mag_phase(f_col(1:floor(N/2)+1),Hz,false,[],[],'','Hz');

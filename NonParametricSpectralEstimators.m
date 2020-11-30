@@ -45,8 +45,8 @@ semilogy(f_col,R_XX_Welch_Matlab)
 xlim([0,f_s/2])
 grid on
 set(gca,'PlotBoxAspectRatio',[2,1,1])
-xlabel('$f$ (Hz)', 'interpreter', 'latex');
+xlabel('$f$ (Hz)','interpreter','latex');
 legend_str={'$\hat{R}_{XX}^{\mathrm{periodo}}$','$\hat{R}_{XX}^{\mathrm{m-periodo}}$ using Hann window',['$\hat{R}_{XX}^{\mathrm{Welch}}$ for $P=',int2str(P),'$ using Hann window']};
-legend(legend_str, 'interpreter', 'latex')
+legend(legend_str,'interpreter','latex')
 
 export_figure(gcf,'',{'NonParametricSpectralEstimators'});

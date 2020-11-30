@@ -31,8 +31,8 @@ for ii=1:N_avg
         R_XX_temp=X_rows(:,nf)*X_rows(:,nf)'/N;
         R_XY_temp=Y_rows(:,nf)*X_rows(:,nf)'/N;
         
-        R_XX(:,:,nf)=(1-1/N_avg)*R_XX(:,:,nf)+R_XX_temp/N_avg;        %equivalent to sum(R_XX(:,:,nf))/N_avg, for i =1 to i=N_avg
-        R_XY(:,:,nf)=(1-1/N_avg)*R_XY(:,:,nf)+R_XY_temp/N_avg;        %equivalent to sum(R_XY(:,:,nf))/N_avg, for i =1 to i=N_avg
+        R_XX(:,:,nf)=(1-1/N_avg)*R_XX(:,:,nf)+R_XX_temp/N_avg;        %equivalent to sum(R_XX(:,:,nf))/N_avg,for i =1 to i=N_avg
+        R_XY(:,:,nf)=(1-1/N_avg)*R_XY(:,:,nf)+R_XY_temp/N_avg;        %equivalent to sum(R_XY(:,:,nf))/N_avg,for i =1 to i=N_avg
     end
 end
 
