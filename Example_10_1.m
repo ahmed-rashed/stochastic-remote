@@ -10,7 +10,7 @@ f_r=[5,15];
 zeta_r=[0.02,0.01];
 
 f_s=100/15*max(f_r);
-T=10;   %T and T_r should be merged in one variable called T (T_r is the notation of shin,and T is my notation)
+T=10;   %T and T_r should be merged in one variable called T (T_r is the notation of shin, and T is my notation)
 T_r=4;
 %T_r=20;
 

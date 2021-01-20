@@ -27,7 +27,7 @@ f_c=f_s/10;
 
 if f_c<(1/(D_T_2-D_T_1)),warning('s(t) is not wide band enough for detecting D_T=D_T_1 & D_T_2'),end
 
-[b_filt,a_filt]=butter(9,f_c/(f_s/2));  %designs a 9th-order low-pass digital Butterworth filter (IIR),where b is a vector containing coefficients of a moving average part and a is a vector containing coefficients of an auto-regressive part of the transfer function (see Equation (6.12) of Shin's book).
+[b_filt,a_filt]=butter(9,f_c/(f_s/2));  %designs a 9th-order low-pass digital Butterworth filter (IIR), where b is a vector containing coefficients of a moving average part and a is a vector containing coefficients of an auto-regressive part of the transfer function (see Equation (6.12) of Shin's book).
 s_vec=filtfilt(b_filt,a_filt,s_vec);  %Filter s(t) with (full) bandwidth approximately 20 Hz (- fc to fc).
 
 s_vec=s_vec-mean(s_vec);    % Makes mean(s)=0

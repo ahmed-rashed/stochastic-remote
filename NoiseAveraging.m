@@ -19,7 +19,7 @@ t_pad=(0:N_pad-1).'*dt_pad;
 f_pad=(0:N_pad-1).'*df_pad;
 
 f_c=f_c_by_f_s*f_s;   %Low pass filter cut off frequency
-[b,a]=butter(9,f_c/f_s);    %designs a ninth-order low-pass digital Butterworth filter (IIR),where b is a vector containing coefficients of a moving average part and a is a vector containing coefficients of an auto-regressive part of the transfer function [Shin; Equation (6.12)].
+[b,a]=butter(9,f_c/f_s);    %designs a ninth-order low-pass digital Butterworth filter (IIR), where b is a vector containing coefficients of a moving average part and a is a vector containing coefficients of an auto-regressive part of the transfer function [Shin; Equation (6.12)].
 
 N_N_avg=length(N_avg_vec);
 noise_expectation_current=zeros(N,1);
@@ -33,9 +33,9 @@ for N_avg=1:N_avg_vec(end)
     
     r_nn_i_padded=xcorr_xspec_linear(noise_i,noise_i,'unbiased');
 
-    noise_expectation_current=(1-1/N_avg)*noise_expectation_current+noise_i/N_avg;  %equivalent to sum(noise_i)/N_avg,for i =1 to i=N_avg
+    noise_expectation_current=(1-1/N_avg)*noise_expectation_current+noise_i/N_avg;  %equivalent to sum(noise_i)/N_avg, for i =1 to i=N_avg
     
-    r_nn_padded_current=(1-1/N_avg)*r_nn_padded_current+r_nn_i_padded/N_avg;        %equivalent to sum(r_nn_i_padded)/N_avg,for i =1 to i=N_avg
+    r_nn_padded_current=(1-1/N_avg)*r_nn_padded_current+r_nn_i_padded/N_avg;        %equivalent to sum(r_nn_i_padded)/N_avg, for i =1 to i=N_avg
 
     if N_avg==N_avg_vec(nn)
         noise_expectation_cols(:,nn)=noise_expectation_current;
@@ -75,8 +75,8 @@ f_autoCorr1=figure;maximizeFigure(f_autoCorr1);
 x_xlabel_Latex='$\tau/T^{\mathrm{pad}}$ ,:$T^{\mathrm{pad}}=N^{\mathrm{pad}} / N \times T$';
 X_xlabel_Latex='$f/f_{\mathrm{s}}^{\mathrm{pad}}$ ,:$f_{\mathrm{s}}^{\mathrm{pad}}=f_{\mathrm{s}}$';
 for ii=1:N_N_avg
-    x_Title_Latex{ii}=['$r_{xx}^{\mathrm{pad}}(\tau)$ (@ $\Delta t^{\mathrm{pad}}=\Delta t$),$N^{\mathrm{pad}}=',int2str(N_pad),'$ \& $N_{\mathrm{avg}}=',int2str(N_avg_vec(ii)),'$'];
-    X_Title_Latex{ii}=['$R_{XX}^{\mathrm{pad}}(f)$ (@$\Delta f^{\mathrm{pad}}=N/N^{\mathrm{pad}} \times \Delta f$),$N^{\mathrm{pad}}=',int2str(N_pad),'$ \& $N_{\mathrm{avg}}=',int2str(N_avg_vec(ii)),'$'];
+    x_Title_Latex{ii}=['$r_{xx}^{\mathrm{pad}}(\tau)$ (@ $\Delta t^{\mathrm{pad}}=\Delta t$), $N^{\mathrm{pad}}=',int2str(N_pad),'$ \& $N_{\mathrm{avg}}=',int2str(N_avg_vec(ii)),'$'];
+    X_Title_Latex{ii}=['$R_{XX}^{\mathrm{pad}}(f)$ (@$\Delta f^{\mathrm{pad}}=N/N^{\mathrm{pad}} \times \Delta f$), $N^{\mathrm{pad}}=',int2str(N_pad),'$ \& $N_{\mathrm{avg}}=',int2str(N_avg_vec(ii)),'$'];
 end
 signal_variance_row=r_nn_padded_cols(1,:);
 y_HorizontalLines=signal_variance_row;
@@ -93,7 +93,7 @@ f_autoCorr2=figure;maximizeFigure(f_autoCorr2);
 x_xlabel_Latex='$\tau/T$  ,:$T^{\mathrm{pad}}=N^{\mathrm{pad}} / N \times T$';
 X_xlabel_Latex='$f/f_{\mathrm{s}}$  ,:$f_{\mathrm{s}}^{\mathrm{pad}}=f_{\mathrm{s}}$';
 for ii=1:N_N_avg
-    x_Title_Latex{ii}=['$r_{xx}^{\mathrm{pad}}(\tau)$ (@ $\Delta t^{\mathrm{pad}}=\Delta t$),$N=',int2str(N),'$ \& $N_{\mathrm{avg}}=',int2str(N_avg_vec(ii)),'$'];
+    x_Title_Latex{ii}=['$r_{xx}^{\mathrm{pad}}(\tau)$ (@ $\Delta t^{\mathrm{pad}}=\Delta t$), $N=',int2str(N),'$ \& $N_{\mathrm{avg}}=',int2str(N_avg_vec(ii)),'$'];
     X_Title_Latex{ii}=['$R_{XX}^{\mathrm{pad}}(f)$ (@$\Delta f^{\mathrm{pad}}=N/N^{\mathrm{pad}} \times \Delta f$),$N=',int2str(N),'$ \& $N_{\mathrm{avg}}=',int2str(N_avg_vec(ii)),'$'];
 end
 x_VeticalLines=[];

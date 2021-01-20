@@ -30,7 +30,7 @@ for T=T_vec
     figure
     subplot(2,1,1)
     plot(t_vec,x_hat_vec,t_vec,x_vec)
-%     xlim([0,2*T_0])
+    xlim([0,2*T_0])
     xlabel('$t$ (sec.)','interpreter','latex');
     legend({'$\hat{x}(t)=x(t)+n(t)$','$x(t)$'},'interpreter','latex')
     title(['$\mathrm{SNR}=',num2str(SNR),',T=',num2str(T),'$ sec'],'interpreter','latex')
@@ -43,7 +43,7 @@ for T=T_vec
 
     subplot(2,1,2)
     plot(tau,r_xx_hat)
-%     xlim(2*T_0*[-1,1])
+    xlim(2*T_0*[-1,1])
     xlabel('$\tau$ (sec.)','interpreter','latex');
     ylabel('$r_{\hat{x}\hat{x}}(\tau)$','interpreter','latex');
     set(gca,'XGrid','on')

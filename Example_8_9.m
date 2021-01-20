@@ -32,7 +32,7 @@ r_xx=xcorr(x_vec,x_vec,kappa_max,'unbiased');
 r_xy=xcorr(y_vec,x_vec,kappa_max,'unbiased');
 
 f=(0:kappa_max-1)*f_s/kappa_max;    %Why discard the -ve tau part?
-S_xy=fft(r_xy(kappa_max+1:end-1));  %Why S_xy is calculated here using fft,while in 9.3 it is calculated using cpsd?
+S_xy=fft(r_xy(kappa_max+1:end-1));  %Why S_xy is calculated here using fft, while in 9.3 it is calculated using cpsd?
 
 subplot(2,1,1)
 plot(f(1:kappa_max/2+1),unwrap(angle(S_xy(1:kappa_max/2+1))))

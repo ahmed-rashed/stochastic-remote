@@ -36,7 +36,7 @@ x_rnd=x_rnd-mean(x_rnd);
 x_rnd=x_rnd/std(x_rnd); % Makes mean(s)=0 & std(s)=1;
 
 s_fn_cvec={@(t) (cos(2*pi*f_0*t)),@(t) (cos(2*pi*f_0*t-pi).*(1+cos(2*pi*t/T_burst-pi))),@(t) (chirp(t,f_0,T_1,f_1)),@(t) (interp1(t_rnd_vec,x_rnd,t,'linear',0))};
-s_title_cvec={'Harmonic pulse','Hann-weighted harmonic pulse','LFM pulse','Transient pulse'};
+s_title_cvec={'Tone pulse','Hann-weighted-tone pulse','LFM pulse','Random pulse'};
 
 SNR_vec=[1/2,inf];
 
