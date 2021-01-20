@@ -1,85 +1,67 @@
 clearvars
 clc
 close all
-set(groot,'DefaultLineLineWidth',1);
 
 load CantiliverBeamImpactTest    %loads x_rows and y_rows
+SNR_db=40;
+
 
 [P,N]=size(x_rows);
 f_s=256;
 [T,D_t,D_f]=samplingParameters_fs_N(f_s,N);
+t_row=(0:N-1)*D_t;
+f_row=(0:N-1)*D_f;
 
 Beta=1.28;  %over sampling facor defined as f_s=2*f_max*Beta
 f_max=f_s/2/Beta;
 N_f_max=round(N/2/Beta);
 
-f_row=(0:N-1)*D_f;
-t_row=(0:N-1)*D_t;
+x_window_row=ones(1,N);
+y_window_row=x_window_row;
+x_window_row([1:4,20:end])=0;
+y_window_row(1:4)=0;
+x_weighted_rows=addNoise(x_rows,db2pow(SNR_db)).*(ones(P,1)*x_window_row);
+y_weighted_rows=addNoise(y_rows,db2pow(SNR_db)).*(ones(P,1)*y_window_row);
 
-X_rows=fft(x_rows,[],2);
-Y_rows=fft(y_rows,[],2);
-
-%calculate H_raw
-H_raw=Y_rows(1,:)./X_rows(1,:);
-h_raw=ifft(H_raw);
-
-%H1 estimator
-R_XY=mean(Y_rows.*conj(X_rows));
-R_XX=mean(X_rows.*conj(X_rows));
-H_1=R_XY./R_XX;
+X_weighted_rows=fft(x_weighted_rows,[],2);
+Y_weighted_rows=fft(y_weighted_rows,[],2);
 
 %Plot the first measured x and y signals along with their FFT
 figure
-subplot(3,2,1)
-plot(t_row,x_rows(1,:));
-xlim([-0.5,T])
+subplot(2,2,1)
+plot(t_row/T,x_weighted_rows(1,:));
+xlim([-0.05,1])
 set(gca,'XTickLabel',[]);
 ylabel('$x_{1}(t)$','interpreter','latex');
 
-subplot(3,2,2)
-semilogy(f_row(1:N_f_max),abs(X_rows(1,1:N_f_max)));
-axis tight
-grid on
+subplot(2,2,2)
+semilogy(f_row(1:N_f_max)/f_s,abs(X_weighted_rows(1,1:N_f_max)));
 set(gca,'XTickLabel',[]);
 ylabel('$\left|X_{1}(f)\right|$','interpreter','latex');
 
-subplot(3,2,3)
-plot(t_row,y_rows(1,:));
-xlim([-0.5,T])
-set(gca,'XTickLabel',[]);
+subplot(2,2,3)
+plot(t_row/T,y_weighted_rows(1,:));
+xlim([-0.05,1])
 ylabel('$y_{1}(t)$','interpreter','latex');
+xlabel('$t/T$','interpreter','latex');
 
-subplot(3,2,4)
-semilogy(f_row(1:N_f_max),abs(Y_rows(1,1:N_f_max)));
-axis tight
-grid on
-set(gca,'XTickLabel',[]);
+subplot(2,2,4)
+semilogy(f_row(1:N_f_max)/f_s,abs(Y_weighted_rows(1,1:N_f_max)));
 ylabel('$\left|Y_{1}(f)\right|$','interpreter','latex');
+xlabel('$f/f_{\mathrm{s}}$','interpreter','latex');
 
-%Plot h_raw & H_raw
-subplot(3,2,5);
-plot(t_row,h_raw);
-xlim([-0.5,T])
-xlabel('$t$ (s)','interpreter','latex');
-ylabel('$h_{\mathrm{raw}}(t)$','interpreter','latex');
+%H_raw
+H_raw=Y_weighted_rows(1,:)./X_weighted_rows(1,:);
 
-subplot(3,2,6);
-semilogy(f_row(1:N_f_max),abs(H_raw(1:N_f_max)));
-axis tight
-grid on
-xlabel('$f$ (Hz)','interpreter','latex');
-ylabel('$\left|H_{\mathrm{raw}}(f)\right|$','interpreter','latex');
+%H_Welch
+R_XY=mean(Y_weighted_rows.*conj(X_weighted_rows));
+R_XX=mean(abs(X_weighted_rows).^2);
+H_Welch=R_XY./R_XX;
 
-%Plot H_raw and H_1 estimator
+%Plot H_raw and H_Welch estimator
 figure
-ax_mag_h=subplot(4,1,[1:3]);hold on;axis tight
-ax_phase_h=subplot(4,1,4);hold on;axis tight
-plot_FRF_mag_phase(f_row(1:N_f_max),H_raw(1:N_f_max),false,ax_mag_h,ax_phase_h,[]);
-plot_FRF_mag_phase(f_row(1:N_f_max),H_1(1:N_f_max),false,ax_mag_h,ax_phase_h,[]);
-legend(ax_mag_h,{'$\left|H_{\mathrm{raw}}(f)\right|$','$\left|\hat{H}_{1}(f)\right|$'},'interpreter','latex')
-legend(ax_phase_h,{'$\angle \left(H_{\mathrm{raw}}(f)\right)$','$\angle \left(\hat{H}_{1}(f)\right)$'},'interpreter','latex')
-
-set(groot,'DefaultLineLineWidth','remove');
+ax_mag_h=plot_FRF_mag_phase(f_row(1:N_f_max)/f_s,[H_raw(1:N_f_max);H_Welch(1:N_f_max)],false,[],[],'$f/f_{\mathrm{s}}$');
+legend(ax_mag_h,{'$\hat{H}_{\mathrm{raw}}(f)$','$\hat{H}_{\mathrm{Welch}}(f)$'},'interpreter','latex')
 
 export_figure(1,'',{'CantiliverBeamImpactTest_Signals'})
 export_figure(2,'',{'CantiliverBeamImpactTest_FRF'})

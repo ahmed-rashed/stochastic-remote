@@ -1,7 +1,7 @@
 function M_coh=MultipleCoherehence_Ahmed(fs,x,y,n,nfft)
 % Calculation of multiple coherence.
 %
-%This is based on equation (5.126) of [Random Data: Analysis and measurements procedures,Bendat and Piersol]
+%This is based on equation (5.126) of [Random Data: Analysis and measurements procedures, Bendat and Piersol]
 
 % x :inputs (#time samples x #inputs)
 % y :outputs (#time samples x #outputs)
@@ -23,7 +23,7 @@ noverlap=[];
 M=length(x(1,:));% # inputs
 N=length(y(1,:));% # outputs
 if (n<=0) || (n>N) 
-    error('index error,check index value (index)') 
+    error('index error, check index value (index)') 
 end
 window =[];% assuming pure harmonic signal,otherwise use a window
 %window=hann(nfft);

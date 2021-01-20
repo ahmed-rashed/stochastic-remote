@@ -5,8 +5,8 @@ close all
 N_max=3e2;
 
 rng(0);
-%x_row=round(rand(1,N_max)); % 1: head_row,0: tail_row
-x_row=randi(2,1,N_max)-1; % 1: head_row,0: tail_row
+%x_row=round(rand(1,N_max)); % 1: head_row, 0: tail_row
+x_row=randi(2,1,N_max)-1; % 1: head_row, 0: tail_row
 
 N_vec=1:N_max;
 head_row= x_row==1;

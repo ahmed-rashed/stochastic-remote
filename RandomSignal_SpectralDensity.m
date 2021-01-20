@@ -10,12 +10,12 @@ D_T=abs(D_T_2-D_T_1);
 SNR_y=10;
 
 %We want to calculate r_{xy}(\tau) to up to \tau=2*max(D_T_1,D_T_2)
-%Thus,2*max(D_T_1,D_T_2) should be <= 0.1*T_Tot
+%Thus, 2*max(D_T_1,D_T_2) should be <= 0.1*T_Tot
 %or D_T_2<= 0.05*T_Tot or T_Tot>=20*D_T_2
 T_Tot=720*D_T_2;
-f_s=20*2/D_T;   %To detect the delayed signals,f_s>2/D_T
+f_s=20*2/D_T;   %To detect the delayed signals, f_s>2/D_T
 % T_Tot=720*D_T_2;
-% f_s=20*2/D_T;   %To detect the delayed signals,f_s>2/D_T
+% f_s=20*2/D_T;   %To detect the delayed signals, f_s>2/D_T
 [D_t,K_Tot,D_f]=samplingParameters_T_fs(T_Tot,f_s);
 f_c=0.4*f_s;
 if f_c<(1/D_T),warning('s(t) is not wide band enough for detecting D_T=D_T_1 & D_T_2'),end
@@ -26,7 +26,7 @@ T_s=T_Tot+T_start;
 K_s=T_s/D_t;    %K_Tot+k_start
 rng(0);
 s_vec=randn(1,K_s);   %white noise
-[b_filt,a_filt]=butter(9,f_c/(f_s/2));  %designs a 9th-order low-pass digital Butterworth filter (IIR),where b is a vector containing coefficients of a moving average part and a is a vector containing coefficients of an auto-regressive part of the transfer function (see Equation (6.12) of Shin's book).
+[b_filt,a_filt]=butter(9,f_c/(f_s/2));  %designs a 9th-order low-pass digital Butterworth filter (IIR), where b is a vector containing coefficients of a moving average part and a is a vector containing coefficients of an auto-regressive part of the transfer function (see Equation (6.12) of Shin's book).
 s_vec=filtfilt(b_filt,a_filt,s_vec);  %Filter s(t) with (full) bandwidth approximately 20 Hz (- fc to fc).
 s_vec=s_vec-mean(s_vec);    % Makes mean(s)=0
 s_vec=s_vec/std(s_vec);     % Makes std(s)=1

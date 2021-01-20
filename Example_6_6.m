@@ -22,7 +22,7 @@ axis([-0.4 4.4 0 90])
 xlabel('\itn'); ylabel('\ity_p\rm(\itn\rm)')
 
 Xz=fft([x zeros(1,length(h)-1)]); %% y=conv(x,h) will give the same results.
-Hz=fft([h zeros(1,length(x)-1)]); %% In fact,Matlab uses this method.
+Hz=fft([h zeros(1,length(x)-1)]); %% In fact, Matlab uses this method.
 yz=ifft(Xz.*Hz);                   
 nz=0:8;
 
