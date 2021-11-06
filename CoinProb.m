@@ -22,7 +22,7 @@ subplot(3,1,1)
 plot(x_row,'.-')
 ylabel('Coin Face','interpreter','latex')
 ylim([-.1 1.1])
-set(gca,'XTickLabel',[],'YTick',[0,1],'YTickLabel',{'H','T'});
+set(gca,'XTickLabel',[],'YTick',[0,1],'YTickLabel',["H","T"]);
 grid
 
 subplot(3,1,2)
@@ -41,4 +41,4 @@ ylim([0 1])
 set(gca,'YTick',[0:.1:1])
 grid
 
-export_figure(1,'||',{'RelativeFrequency'})
+export_figure(1,'||',"RelativeFrequency")

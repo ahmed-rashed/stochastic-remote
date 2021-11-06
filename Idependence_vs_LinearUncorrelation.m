@@ -39,8 +39,8 @@ for ii=1:3
         axis tight
         xlabel('$x$','interpreter','latex','FontSize',8);
         ylabel('$y$','interpreter','latex','FontSize',8);
-        title(['$\rho_{xy}=$',num2str(CorrCoeff_xy)],'interpreter','latex','FontSize',8)
+        title("$\rho_{xy}=$"+CorrCoeff_xy,'interpreter','latex','FontSize',8)
     end
 end
 
-export_figure(gcf,'==',{'CorrelationCoeff'})
+export_figure(gcf,'==',"CorrelationCoeff")

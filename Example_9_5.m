@@ -42,7 +42,7 @@ H_T=(R_YY-R_XX + sqrt((R_XX-R_YY).^2 + 4*abs(R_XY).^2))./(2*R_YX);
 ax_mag_h=subplot(8,1,5:7);
 ax_phase_h=subplot(8,1,8);
 plot_FRF_mag_phase(f_col,[H_1,H_2,H_T],false,ax_mag_h,ax_phase_h);
-legend(ax_mag_h,{'$H_{1}$','$H_{2}$','$H_{\mathrm{T}}$'},'interpreter','latex')
+legend(ax_mag_h,["$H_{1}$","$H_{2}$","$H_{\mathrm{T}}$"],'interpreter','latex')
 xlim(ax_mag_h,[0,f_s/2])
 xlim(ax_phase_h,[0,f_s/2])
 
@@ -54,7 +54,7 @@ grid
 title('zoom on 1st resonance')
 xlabel('$f$ (Hz)','interpreter','latex')
 ylabel('$\left|H\right|$','interpreter','latex')
-legend({'$H_{1}$','$H_{2}$','$H_{\mathrm{T}}$'},'interpreter','latex')
+legend(["$H_{1}$","$H_{2}$","$H_{\mathrm{T}}$"],'interpreter','latex')
 xlim([9.5,12])
 
 subplot(1,2,2)
@@ -63,11 +63,11 @@ grid
 title('zoom on 2nd resonance')
 xlabel('$f$ (Hz)','interpreter','latex')
 ylabel('$\left|H\right|$','interpreter','latex')
-legend({'$H_{1}$','$H_{2}$','$H_{\mathrm{T}}$'},'interpreter','latex')
+legend(["$H_{1}$","$H_{2}$","$H_{\mathrm{T}}$"],'interpreter','latex')
 xlim([61,64])
 
 set(groot,'DefaultAxesColorOrder','remove')
 set(groot,'DefaultLineLineWidth','remove');
 
-export_figure(1,'||',{'H_estimators_experimental'})
-export_figure(2,'',{'H_estimators_experimental_zoom'})
+export_figure(1,'||',"H_estimators_experimental")
+export_figure(2,'',"H_estimators_experimental_zoom")

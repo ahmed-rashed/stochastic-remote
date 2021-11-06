@@ -17,14 +17,14 @@ win_name='Hann';
 
 alpha_vec=[0,0.5,2/3,0.75];
 N_alpha_vec=length(alpha_vec);
-legend_str_vec=cell(N_alpha_vec,1);
+legend_str_vec=strings(N_alpha_vec,1);
 subplot(N_alpha_vec+1,1,N_alpha_vec+1);hold on;grid
 for ii=1:N_alpha_vec
     if alpha_vec(ii)==0
-        legend_str_vec{ii}='$\alpha=0$';
+        legend_str_vec(ii)="$\alpha=0$";
     else
         [numerator,denomerator]=rat(alpha_vec(ii));   %Display the floating alpha_vec(ii) as a fraction
-        legend_str_vec{ii}=['$\alpha=\frac{',int2str(numerator),'}{',int2str(denomerator),'}$'];
+        legend_str_vec(ii)="$\alpha=\frac{"+numerator+'}{'+denomerator+'}$';
     end
     
     subplot(N_alpha_vec+1,1,ii)
@@ -82,7 +82,7 @@ for ii=1:N_alpha_vec
     yyaxis right
     ylim(ylims)
     
-    text(.985,.9,legend_str_vec{ii},'Units','normalized','HorizontalAlignment','right','VerticalAlignment','top','EdgeColor',[0,0,0],'BackgroundColor',[1,1,1],'interpreter','latex')
+    text(.985,.9,legend_str_vec(ii),'Units','normalized','HorizontalAlignment','right','VerticalAlignment','top','EdgeColor',[0,0,0],'BackgroundColor',[1,1,1],'interpreter','latex')
 end
 subplot(N_alpha_vec+1,1,N_alpha_vec+1)
 xlim([0,T_max]);
@@ -95,4 +95,4 @@ set(h_leg,'Position',pos)
 set(groot,'DefaultAxesColorOrder','remove')
 set(groot,'DefaultAxesClipping','remove')
 
-export_figure(gcf,'==',{'OverlapEffectivPowerWeighting'})
+export_figure(gcf,'==',"OverlapEffectivPowerWeighting")

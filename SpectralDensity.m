@@ -62,7 +62,7 @@ grid
 title(['$\left|R_{XY}^{\mathrm{Welch}}\right|$ for $N=',int2str(N),'$ and $Q=',int2str(Q),'$'],'interpreter','latex')
 xlabel('$f$ (Hz)','interpreter','latex')
 
-export_figure(gcf,'||',{'SpectralDensity'})
+export_figure(gcf,'||',"SpectralDensity")
 
 figure
 H_XY_raw=tfestimate(x_noisy,y_noisy,rectwin(N_total),0,N_total,f_s,'twosided');
@@ -89,4 +89,4 @@ ylim([0,1.1]);grid
 title(['$\gamma_{YX}^2$ for $N=',int2str(N),'$ and $Q=',int2str(Q),'$'],'interpreter','latex')
 xlabel('$f$ (Hz)','interpreter','latex')
 
-export_figure(gcf,'',{'coherence'})
+export_figure(gcf,'',"coherence")

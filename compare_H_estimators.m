@@ -61,7 +61,7 @@ H_Welch=R_XY./R_XX;
 %Plot H_raw and H_Welch estimator
 figure
 ax_mag_h=plot_FRF_mag_phase(f_row(1:N_f_max)/f_s,[H_raw(1:N_f_max);H_Welch(1:N_f_max)],false,[],[],'$f/f_{\mathrm{s}}$');
-legend(ax_mag_h,{'$\hat{H}_{\mathrm{raw}}(f)$','$\hat{H}_{\mathrm{Welch}}(f)$'},'interpreter','latex')
+legend(ax_mag_h,["$\hat{H}_{\mathrm{raw}}(f)$","$\hat{H}_{\mathrm{Welch}}(f)$"],'interpreter','latex')
 
-export_figure(1,'',{'CantiliverBeamImpactTest_Signals'})
-export_figure(2,'',{'CantiliverBeamImpactTest_FRF'})
+export_figure(1,'',"CantiliverBeamImpactTest_Signals")
+export_figure(2,'',"CantiliverBeamImpactTest_FRF")

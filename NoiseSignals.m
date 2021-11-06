@@ -7,7 +7,7 @@ N=2000;
 rng(0);
 signal_rows=[randn([1,N])      %Normaly distributed noise (White noise)
                 rand([1,N])];   %Uniformly distributed noise
-Titles={'Normally distributed noise','Uniformly distributed noise'};
+Titles=["Normally distributed noise","Uniformly distributed noise"];
 y_lims=[-3,3];
 N_bins=37;
 
@@ -18,7 +18,7 @@ N_signals=size(signal_rows,1);
 for n=1:N_signals
     ax=subplot(N_signals,4,(n-1)*4+(1:3));
     plot(signal_rows(n,:));
-    title(Titles{n})
+    title(Titles(n))
     xlabel('samples')
     ylim(y_lims);
     ax.YAxis.MinorTickValues=equiSpacedintervals;
@@ -36,4 +36,4 @@ for n=1:N_signals
     ax.YAxis.MinorTick='on';
 end
 
-export_figure(1,'==',{'WhiteNoise'})
+export_figure(1,'==',"WhiteNoise")

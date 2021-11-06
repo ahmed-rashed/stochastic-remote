@@ -28,7 +28,7 @@ figure
 ax1=subplot(N_T+1,1,1);
 plot(t_row(1:K_min),[x_hat_row(1:K_min);x_row(1:K_min)])
 xlabel('$t$ (sec.)','interpreter','latex');
-legend({'$\hat{x}(t)=x(t)+n(t)$','$x(t)$'},'interpreter','latex')
+legend(["$\hat{x}(t)=x(t)+n(t)$","$x(t)$"],'interpreter','latex')
 title("$\mathrm{SNR}="+SNR+'$','interpreter','latex')
 
 %Additional optimization of the axes for correct comparison with the correlation curves
@@ -51,4 +51,4 @@ for T=T_vec
     n=n+1;
 end
 
-export_figure(1,'||',{'s1'})
+export_figure(1,'||',"s1")

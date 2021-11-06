@@ -23,7 +23,7 @@ figure
 [ax_mag_h,ax_phase_h]=plot_FRF_mag_phase(f,[R_XY,ones(size(R_XY))]);
 %plot(f,abs(R_XY),f,ones(size(f)))
 %xlabel('$f$ (Hz)','interpreter','latex')
-legend(ax_mag_h,{'$R_{\hat{X}\hat{Y}}(f)$','$R_{XY}(f)$'},'interpreter','latex')
+legend(ax_mag_h,["$R_{\hat{X}\hat{Y}}(f)$","$R_{XY}(f)$"],'interpreter','latex')
 %ylabel('Estimate of |\itS_x_y\rm(\itf\rm)| (linear scale)')
 ylim(ax_mag_h,[0 1.1])
 xlim(ax_mag_h,[0 f_s/2])

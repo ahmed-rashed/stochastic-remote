@@ -54,7 +54,7 @@ for nn=1:length(SNR_x)
     grid
     set(gca,'XTickLabel',[]);
     ylabel('$\gamma_{YX}^{2}(f)$','interpreter','latex')
-    title(['SNR_x=',num2str(SNR_x(nn)),' & SNR_y=',num2str(SNR_y(nn))])
+    title("SNR_x="+SNR_x(nn)+' & SNR_y='+SNR_y(nn))
 
     H_1=R_XY./R_XX; 
     H_2=R_YY./R_YX;
@@ -63,7 +63,7 @@ for nn=1:length(SNR_x)
     ax_mag_h=subplot(6,1,3:5);
     ax_phase_h=subplot(6,1,6);
     plot_FRF_mag_phase(f_col,[H_exact,H_DFT,H_1,H_2,H_T],false,ax_mag_h,ax_phase_h);
-    legend(ax_mag_h,{'$H_{\mathrm{exact}}$','$\mathrm{DFT}\left[h_{\mathrm{exact}}\right]$','$H_{1}$','$H_{2}$','$H_{\mathrm{T}}$'},'interpreter','latex')
+    legend(ax_mag_h,["$H_{\mathrm{exact}}$","$\mathrm{DFT}\left[h_{\mathrm{exact}}\right]$","$H_{1}$","$H_{2}$","$H_{\mathrm{T}}$"],'interpreter','latex')
     xlim(ax_mag_h,[0,f_s/2])
     xlim(ax_phase_h,[0,f_s/2])
 
@@ -77,4 +77,4 @@ end
 set(groot,'DefaultAxesColorOrder','remove')
 set(groot,'DefaultLineLineWidth','remove');
 
-export_figure(figs,'||',{'H_estimators_1','H_estimators_2','H_estimators_3'})
+export_figure(figs,'||',["H_estimators_1","H_estimators_2","H_estimators_3"])

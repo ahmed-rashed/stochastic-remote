@@ -36,12 +36,12 @@ x_rnd=x_rnd-mean(x_rnd);
 x_rnd=x_rnd/std(x_rnd); % Makes mean(s)=0 & std(s)=1;
 
 s_fn_cvec={@(t) (cos(2*pi*f_0*t)),@(t) (cos(2*pi*f_0*t-pi).*(1+cos(2*pi*t/T_burst-pi))),@(t) (chirp(t,f_0,T_1,f_1)),@(t) (interp1(t_rnd_vec,x_rnd,t,'linear',0))};
-s_title_cvec={'Tone pulse','Hann-weighted-tone pulse','LFM pulse','Random pulse'};
+s_title_cvec=["Tone pulse","Hann-weighted-tone pulse","LFM pulse","Random pulse"];
 
 SNR_vec=[1/2,inf];
 
 N_SNR=length(SNR_vec);
-legend_str=cell(N_SNR,1);
+legend_str=strings(N_SNR,1);
 
 iii=1;
 for s_fn=s_fn_cvec
@@ -81,10 +81,10 @@ for s_fn=s_fn_cvec
 
     for ii=1:N_SNR
         if SNR_vec(ii)==inf
-            legend_str{ii}='$\mathrm{SNR}=\infty$';
+            legend_str(ii)="$\mathrm{SNR}=\infty$";
             line_width=1.5;
         else
-            legend_str{ii}=['$\mathrm{SNR}=',num2str(SNR_vec(ii)),'$'];
+            legend_str(ii)="$\mathrm{SNR}="+SNR_vec(ii)+'$';
             line_width=1;
         end
 
@@ -102,4 +102,4 @@ end
 
 set(groot,'DefaultAxesColorOrder','remove')
 
-export_figure(1:4,'==',{'HarmonicPulseRadar','WeightedHarmonicPulseRadar','LFM_PulseCompressionRadar','RandomPulseRadar'})
+export_figure(1:4,'==',["HarmonicPulseRadar","WeightedHarmonicPulseRadar","LFM_PulseCompressionRadar","RandomPulseRadar"])

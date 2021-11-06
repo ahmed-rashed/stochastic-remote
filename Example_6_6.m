@@ -41,5 +41,4 @@ xlabel('\itn'); ylabel('\ity\rm(\itn\rm)')
 
 hold on
 stem(np,yp,'fill')
-legend({'Circular conv','Linear conv'})
-
+legend(["Circular conv","Linear conv"])

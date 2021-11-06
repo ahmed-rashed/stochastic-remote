@@ -44,20 +44,20 @@ R_XY=R_XY*f_s;
 figure
 semilogy(f,R_XX,f,ones(size(f)))
 xlabel('$f$ (Hz)','interpreter','latex')
-legend({'$R_{\hat{X}\hat{X}}(f)$','$R_{XX}(f)$'},'interpreter','latex')
+legend(["$R_{\hat{X}\hat{X}}(f)$","$R_{XX}(f)$"],'interpreter','latex')
 xlim([0,f_s/2])
 
 figure
 semilogy(f,R_YY,f_col,abs(H_DFT.^2))
 xlabel('$f$ (Hz)','interpreter','latex')
-legend({'$R_{\hat{Y}\hat{Y}}(f)$','$R_{YY}(f)$'},'interpreter','latex')
+legend(["$R_{\hat{Y}\hat{Y}}(f)$","$R_{YY}(f)$"],'interpreter','latex')
 xlim([0,f_s/2])
 
 figure
 [ax_mag_h,ax_phase_h]=plot_FRF_mag_phase(f,R_XY,false);
 hold(ax_mag_h,'all');hold(ax_phase_h,'all')
 plot_FRF_mag_phase(f_col,H_DFT,false,ax_mag_h,ax_phase_h,'','R_{XY}(f)');
-legend(ax_mag_h,{'$R_{\hat{X}\hat{Y}}(f)$','$R_{XY}(f)$'},'interpreter','latex')
+legend(ax_mag_h,["$R_{\hat{X}\hat{Y}}(f)$","$R_{XY}(f)$"],'interpreter','latex')
 xlim(ax_mag_h,[0,f_s/2]);xlim(ax_phase_h,[0,f_s/2])
 
 set(groot,'DefaultAxesColorOrder','remove')

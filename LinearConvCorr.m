@@ -40,7 +40,7 @@ plot(t_lin_conv_vec,lin_conv_vec,t_lin_conv_vec,lin_conv_vec1,t_lin_conv_vec,lin
 xlabel('$k$','interpreter','latex')
 ylabel('$\left(x\overline{*}h\right)_{k}$','interpreter','latex')
 title('Linear Convolution');
-legend({'FFT','conv','cconv'})
+legend(["FFT","conv","cconv"])
 
 %calculate and plot correlation
 subplot(3,2,6)
@@ -52,7 +52,7 @@ plot(tau_lin_corr_vec,lin_corr_vec,t_lin_conv_vec,lin_corr_vec1,tau_lin_corr_vec
 xlabel('$\kappa$','interpreter','latex')
 ylabel('$r_{xy,\kappa}^{\mathrm{lin}}$','interpreter','latex')
 title('Linear Correlation');
-legend({'sum','FFT','cconv','xcorr'})
+legend(["sum","FFT","cconv","xcorr"])
 
 %Additional optimization of the axes for correct comparison with the correlation curves
 for ii=1:4
@@ -67,7 +67,7 @@ pos(1)=pos(1)+pos(3)/3;
 pos(3)=pos(3)*2/3;
 set(subplot(3,2,5),'Position',pos)
 
-export_figure(gcf,'==',{'LinearConvCorr'})
+export_figure(gcf,'==',"LinearConvCorr")
 
 set(groot,'DefaultAxesColorOrder','remove')
 set(groot,'DefaultAxesLineStyleOrder','remove')

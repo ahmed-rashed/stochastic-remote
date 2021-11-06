@@ -39,12 +39,12 @@ set(gca,'XTickLabel',[]);
 subplot(3,1,2)
 r_hh_lin_row=xcorr(h_exact_row,h_exact_row,K)*Delta_t;
 plot(tau_sym_row,[r_yy_lin_row/T_long;r_hh_lin_row*x_std^2*Delta_t])
-legend({'$r_{yy}^{\mathrm{lin}} (\tau)/T$','$r_{hh}(\tau)$'},'interpreter','latex')
+legend(["$r_{yy}^{\mathrm{lin}} (\tau)/T$","$r_{hh}(\tau)$"],'interpreter','latex')
 set(gca,'XTickLabel',[]);
 
 subplot(3,1,3)
 plot(tau_sym_row,r_xy_lin_row/T_long,t_row,h_exact_row*x_std^2*Delta_t);
-legend({'$r_{xy}^{\mathrm{lin}} (\tau)/T$','$h^{\mathrm{exact}}(t)$'},'interpreter','latex')
+legend(["$r_{xy}^{\mathrm{lin}} (\tau)/T$","$h^{\mathrm{exact}}(t)$"],'interpreter','latex')
 xlabel('$t$ \& $\tau$ (s)','interpreter','latex');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -71,4 +71,4 @@ hold(ax_mag_h,'on');
 hold(ax_phase_h,'on');
 plot_FRF_mag_phase(f_row,H_raw.',false,ax_mag_h,ax_phase_h);
 plot_FRF_mag_phase(f_row1,H_Welch,false,ax_mag_h,ax_phase_h);
-legend(ax_mag_h,{'$H(f)^{\mathrm{exact}}$','$H_{1}^{\mathrm{periodogram}}$','$H_{1}^{\mathrm{Welch}}$'},'interpreter','latex')
+legend(ax_mag_h,["$H(f)^{\mathrm{exact}}$","$H_{1}^{\mathrm{periodogram}}$","$H_{1}^{\mathrm{Welch}}$"],'interpreter','latex')

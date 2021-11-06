@@ -126,4 +126,4 @@ plot_FRF_mag_phase(f(1:N_f_max),H_2(1:N_f_max),false,ax_mag_h,ax_phase_h,[],'\ha
 
 set(groot,'DefaultLineLineWidth','remove');
 
-export_figure([1:2],'==',{'CantiliverBeamImpactTest_Signals';'CantiliverBeamImpactTest_FRF'})
+export_figure([1:2],'==',["CantiliverBeamImpactTest_Signals";"CantiliverBeamImpactTest_FRF"])

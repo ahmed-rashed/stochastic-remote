@@ -36,7 +36,7 @@ plot(t_vec,circ_conv_vec,t_vec,circ_conv_vec1);
 xlabel('$k$','interpreter','latex')
 ylabel('$\left(x * h\right)_{k}$','interpreter','latex')
 title('Circular Convolution')
-legend({'FFT','cconv'},'Location','southeast')
+legend(["FFT","cconv"],'Location','southeast')
 
 %calculate and plot correlation
 subplot(3,2,6)
@@ -47,9 +47,9 @@ plot(t_vec,circ_corr_vec,t_vec,circ_corr_vec1,t_vec,circ_corr_vec2);
 xlabel('$\kappa$','interpreter','latex')
 ylabel('$r_{xy,\kappa}^{\mathrm{circ}}$','interpreter','latex')
 title('Circular Correlation')
-legend({'FFT','cconv','sum'},'Location','northeast')
+legend(["FFT","cconv","sum"],'Location','northeast')
 
-export_figure(gcf,'==',{'CircConvCorr'})
+export_figure(gcf,'==',"CircConvCorr")
 
 set(groot,'DefaultAxesColorOrder','remove')
 set(groot,'DefaultAxesLineStyleOrder','remove')

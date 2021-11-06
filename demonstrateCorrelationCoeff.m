@@ -22,31 +22,31 @@ for i_row=1:3
         if i_row==1
             y_row=a_vec(i_a)*x_row;
             if a_vec(i_a)==1
-                ylabel_text='$y=x$';
+                ylabel_text="$y=x$";
             elseif a_vec(i_a)==-1
-                ylabel_text='$y=-x$';
+                ylabel_text="$y=-x$";
             elseif a_vec(i_a)==0
-                ylabel_text='$y=0$';
+                ylabel_text="$y=0$";
             else
-                ylabel_text=['$y=',num2str(a_vec(i_a)),'x$'];
+                ylabel_text="$y="+a_vec(i_a)+'x$';
             end
         elseif i_row==2
             y_row=a_vec(i_a)*x_row+noise_row;
             if a_vec(i_a)==1
-                ylabel_text='$y=x+n$';
+                ylabel_text="$y=x+n$";
             elseif a_vec(i_a)==-1
-                ylabel_text='$y=-x+n$';
+                ylabel_text="$y=-x+n$";
             elseif a_vec(i_a)==0
-                ylabel_text='$y=n$';
+                ylabel_text="$y=n$";
             else
-                ylabel_text=['$y=',num2str(a_vec(i_a)),'x+n$'];
+                ylabel_text="$y="+a_vec(i_a)+'x+n$';
             end
         else
             y_row=.1*x_row.^(b_vec(i_a));
             if b_vec(i_a)~=1
-                ylabel_text=['$y=0.1x^{',num2str(b_vec(i_a)),'}$'];
+                ylabel_text="$y=0.1x^{"+b_vec(i_a)+'}$';
             else
-                ylabel_text='$y=0.1x$';
+                ylabel_text="$y=0.1x$";
             end
         end
         
@@ -65,8 +65,8 @@ for i_row=1:3
         axis tight
         xlabel('$x$','interpreter','latex');
         ylabel(ylabel_text,'interpreter','latex');
-        title(['$\rho_{xy}=',num2str(CorrCoeff_xy),'$'],'interpreter','latex')
+        title("$\rho_{xy}="+CorrCoeff_xy+'$','interpreter','latex')
     end
 end
 
-export_figure(gcf,'==',{'CorrelationCoeff'})
+export_figure(gcf,'==',"CorrelationCoeff")
