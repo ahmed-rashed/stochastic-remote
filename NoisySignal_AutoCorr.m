@@ -2,34 +2,37 @@ clc
 close all
 clearvars
 
+%Noise Parameters
 rng(0); %Generate the same random noise each time this script is executed
+SNR=0.5;
+f_c_by_f_Nyq=0.8;
 
-A=1; f_0=1;
-T_0=1/f_0;
+%Sampling parameters
+f_s=1000;
+K_min=500;
+K_vec=[1,5,10]*K_min;
+N_K=length(K_vec);
 
-f_s=200*f_0;
+K_max=max(K_vec);
+[D_f_min,T_max,D_t]=samplingParameters_fs_N(f_s,K_max);
 
-SNR=0.5;  %SNR_db=-3
-f_c_by_f_Nyquist=0.5;
+t_tot_row=(0:K_max-1)*D_t;
+tau_min_row=(-(K_min-1):K_min-1)*D_t;
 
-T_vec=[2,10,100]*T_0;
-N_T=length(T_vec);
+%Signal Parameters
+A=1;
+f_0=(floor(.1*K_min)+.5)*D_f_min; %f_0 yields worst-case leakage
 
-T_max=max(T_vec);
-[D_t,K_max]=samplingParameters_T_fs(T_max,f_s);
-t_row=(0:K_max-1)*D_t;
-K_min=floor(min(T_vec)/D_t);
-tau_1_row=(-(K_min-1):K_min-1)*D_t;
-
-x_row=A*sin(2*pi*f_0*t_row);
-x_hat_row=addNoise(x_row,SNR,f_c_by_f_Nyquist);
+%Generate long signal
+x_tot_row=A*square(2*pi*f_0*t_tot_row,50-D_t/10);
+x_tot_hat_row=addNoise(x_tot_row,SNR,f_c_by_f_Nyq);
 
 figure
-ax1=subplot(N_T+1,1,1);
-plot(t_row(1:K_min),[x_hat_row(1:K_min);x_row(1:K_min)])
+ax1=subplot(N_K+1,1,1);
+plot(t_tot_row(1:K_min),[x_tot_hat_row(1:K_min);x_tot_row(1:K_min)])
 xlabel('$t$ (sec.)','interpreter','latex');
 legend(["$\hat{x}(t)=x(t)+n(t)$","$x(t)$"],'interpreter','latex')
-title("$\mathrm{SNR}="+SNR+'$','interpreter','latex')
+title("$T_0="+1/f_0+"$ \& SNR="+SNR,'interpreter','latex')
 
 %Additional optimization of the axes for correct comparison with the correlation curves
 pos=get(ax1,'Position');
@@ -38,17 +41,27 @@ pos(3)=pos(3)/2;
 set(ax1,'Position',pos,'XGrid','on')
 
 n=1;
-for T=T_vec
-    K=floor(T/D_t);
-    r_xx_hat_part=xcorr(x_hat_row(1:K),K_min-1,'unbiased');   %This is part of r_xx_hat. r_xx_hat extends over tau_row=(-(K-1):K-1)*D_t
-    
-    ax=subplot(N_T+1,1,n+1);
-    plot(tau_1_row,r_xx_hat_part)
-    xlabel('$\tau$ (sec.)','interpreter','latex');
-    ylabel("$r_{\hat{x}\hat{x}}(\tau); \quad T="+T+'$ sec','interpreter','latex');
+for K=K_vec
+    r_xx_hat_part=xcorr(x_tot_hat_row(1:K),K_min-1)/K;  % This is part of r_xx_hat. r_xx_hat extends over tau_row=(-(K-1):K-1)*D_t
+                                                        % For preiodic and random signals, correlation is scalled with K
+    ax=subplot(N_K+1,1,n+1);
+    plot(tau_min_row,r_xx_hat_part)
+    ylabel("$T="+K*D_t+'$','interpreter','latex');
     set(ax,'XGrid','on')
+
+    if n==1
+        title("$r_{\hat{x}\hat{x}}(\tau)$",'interpreter','latex');
+    end
+
+    if n~=N_K
+        set(ax,'XTickLabel',[]);
+    end
+
+    if n==N_K
+        xlabel('$\tau$ (sec.)','interpreter','latex');
+    end
 
     n=n+1;
 end
 
-export_figure(1,'||',"s1")
+% export_figure(1,'||',"s1")

@@ -8,7 +8,7 @@ x_std=2;
 f_s=10*f_n;
 N=250;
 K=N;
-[T,Delta_t,Delta_f]=samplingParameters_fs_N(f_s,N);
+[Delta_f,T,Delta_t]=samplingParameters_fs_N(f_s,N);
 t_row=(0:K-1)*Delta_t;
 f_row=(0:N-1)*Delta_f;
 

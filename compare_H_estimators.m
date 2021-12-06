@@ -8,7 +8,7 @@ SNR_db=40;
 
 [P,N]=size(x_rows);
 f_s=256;
-[T,D_t,D_f]=samplingParameters_fs_N(f_s,N);
+[D_f,T,D_t]=samplingParameters_fs_N(f_s,N);
 t_row=(0:N-1)*D_t;
 f_row=(0:N-1)*D_f;
 

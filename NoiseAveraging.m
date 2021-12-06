@@ -1,6 +1,6 @@
-function NoiseAveraging()
 clc
 close all
+clearvars
 
 N=2^9
 n_f_max=floor(N/2);

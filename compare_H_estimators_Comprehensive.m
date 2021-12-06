@@ -8,14 +8,14 @@ load CantiliverBeamImpactTest    %loads x_rows and y_rows
 N_avg=size(x_rows,1);
 N=size(x_rows,2);
 f_s=256;
-[T,d_t,d_f]=samplingParameters_fs_N(f_s,N);
+[D_f,T,D_t]=samplingParameters_fs_N(f_s,N);
 
 Beta=1.28;  %over sampling facor defined as f_s=2*f_max*Beta
 f_max=f_s/2/Beta;
 N_f_max=round(N/2/Beta);
 
-f=[0:N-1]*d_f;
-t=[0:N-1]*d_t;
+f=[0:N-1]*D_f;
+t=[0:N-1]*D_t;
 
 X_rows=fft(x_rows,[],2);
 Y_rows=fft(y_rows,[],2);

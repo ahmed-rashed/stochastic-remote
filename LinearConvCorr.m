@@ -33,26 +33,26 @@ subplot(3,2,4);ylabel('$y_{k}$','interpreter','latex')
 
 %calculate and plot convolution
 subplot(3,2,5)
-lin_conv_vec=ifft(fft(x_vec,2*K-1).*fft(y_vec,2*K-1))*Delta_t;
-lin_conv_vec1=conv(x_vec,y_vec)*Delta_t;
-lin_conv_vec2=cconv(x_vec,y_vec,2*K-1)*Delta_t;
-plot(t_lin_conv_vec,lin_conv_vec,t_lin_conv_vec,lin_conv_vec1,t_lin_conv_vec,lin_conv_vec2)
+lin_conv_vec=conv(x_vec,y_vec)*Delta_t;
+lin_conv_vec1=cconv(x_vec,y_vec,2*K-1)*Delta_t;
+lin_conv_vec2=ifft(fft(x_vec,2*K-1).*fft(y_vec,2*K-1))*Delta_t;
+plot(t_lin_conv_vec,[lin_conv_vec;lin_conv_vec1;lin_conv_vec2])
 xlabel('$k$','interpreter','latex')
 ylabel('$\left(x\overline{*}h\right)_{k}$','interpreter','latex')
 title('Linear Convolution');
-legend(["FFT","conv","cconv"])
+legend(["conv","cconv","FFT"])
 
 %calculate and plot correlation
 subplot(3,2,6)
 lin_corr_vec=slow_xcorr(x_vec,y_vec)*Delta_t;
-lin_corr_vec1=ifft(fft(y_vec,2*K-1).*conj(fft(x_vec,2*K-1)))*Delta_t;
-lin_corr_vec2=fliplr(conv(x_vec,fliplr(y_vec)))*Delta_t;
-lin_corr_vec3=xcorr(y_vec,x_vec)*Delta_t;
-plot(tau_lin_corr_vec,lin_corr_vec,t_lin_conv_vec,lin_corr_vec1,tau_lin_corr_vec,lin_corr_vec2,tau_lin_corr_vec,lin_corr_vec3);
+lin_corr_vec1=fliplr(conv(x_vec,fliplr(y_vec)))*Delta_t;
+lin_corr_vec2=xcorr(y_vec,x_vec)*Delta_t;
+lin_corr_vec3=ifft(fft(y_vec,2*K-1).*conj(fft(x_vec,2*K-1)))*Delta_t;
+plot(tau_lin_corr_vec,[lin_corr_vec;lin_corr_vec1;lin_corr_vec2],t_lin_conv_vec,lin_corr_vec3);
 xlabel('$\kappa$','interpreter','latex')
 ylabel('$r_{xy,\kappa}^{\mathrm{lin}}$','interpreter','latex')
 title('Linear Correlation');
-legend(["sum","FFT","cconv","xcorr"])
+legend(["sum","cconv","xcorr","FFT"])
 
 %Additional optimization of the axes for correct comparison with the correlation curves
 for ii=1:4
