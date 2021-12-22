@@ -7,65 +7,104 @@ set(groot,'DefaultAxesLineStyleOrder','-o|-x|-^|-s')
 
 x_vec=[1,.75,.5,.25,.25];
 K=length(x_vec);
-y_vec=[1,1,1,1,1];
-Delta_t=1;
-t_vec=(0:K-1)*Delta_t;
-t_lin_conv_vec=0:2*K-2;
-tau_lin_corr_vec=-(K-1):K-1;
+y_vec=hamming(5,"periodic").';
+D_t=1;
+k_vec=0:K-1;
+
+K_z=2*K-1;
+kappa_lin_conv_vec=0:K_z-1;
+kappa_lin_corr_vec=-(K-1):K-1;
+
+N=K;
+N_z=K_z;
+[~,~,~,N_z_no_fold]=samplingParameters_D_t_N(D_t,N_z);
+X_z_vec=fft(x_vec,N_z);
+Y_z_vec=fft(y_vec,N_z);
+n_z_vec=0:N_z_no_fold-1;
 
 %plot x and y signals
+figures=[figure,figure];
+titles="Linear "+["Convolution","Correlation"];
 for ii=1:2
-    subplot(3,2,ii);
-    plot(t_vec,x_vec)
-    
-    subplot(3,2,2+ii);
-    plot(t_vec,y_vec)
-end
-subplot(3,2,1);xlabel('$\kappa$','interpreter','latex');
-subplot(3,2,2);xlabel('$k$','interpreter','latex');
-subplot(3,2,3);xlabel('$\kappa$','interpreter','latex');
-subplot(3,2,4);xlabel('$k$','interpreter','latex');
+    figure(figures(ii))
 
-subplot(3,2,1);ylabel('$x_{\kappa}$','interpreter','latex')
-subplot(3,2,2);ylabel('$x_k$','interpreter','latex')
-subplot(3,2,3);ylabel('$h_{\kappa}$','interpreter','latex')
-subplot(3,2,4);ylabel('$y_{k}$','interpreter','latex')
+    subplot(3,2,1);
+    plot(k_vec/K_z,x_vec)
+    ylabel('$x_{\mathrm{z},k_{\mathrm{z}}=k}=x_{k}\;\forall\:0\leq k_{\mathrm{z}}\leq K-1$','interpreter','latex')
+    xlabel('$k_{\mathrm{z}}/K_{\mathrm{z}}$','interpreter','latex');
+    
+    subplot(3,2,2);
+    plot(n_z_vec/N_z,abs(X_z_vec(1:N_z_no_fold)))
+    ylabel('$|X_{{\mathrm{z}},n_{\mathrm{z}}}|$','interpreter','latex')
+    xlabel('$n_{\mathrm{z}}/N_{\mathrm{z}}$','interpreter','latex');
+
+    subplot(3,2,3);
+    plot(k_vec/K_z,y_vec)
+    ylabel('$y_{\mathrm{z},k_{\mathrm{z}}=k}=y_{k}\;\forall\:0\leq k_{\mathrm{z}}\leq K-1$','interpreter','latex')
+    xlabel('$k_{\mathrm{z}}/K_{\mathrm{z}}$','interpreter','latex');
+
+    subplot(3,2,4);
+    plot(n_z_vec/N_z,abs(Y_z_vec(1:N_z_no_fold)))
+    ylabel('$|Y_{{\mathrm{z}},n_{\mathrm{z}}}|$','interpreter','latex')
+    xlabel('$n_{\mathrm{z}}/N_{\mathrm{z}}$','interpreter','latex');
+
+    sgtitle(titles(ii))
+end
 
 %calculate and plot convolution
+lin_Conv_vec=X_z_vec.*Y_z_vec*D_t;
+
+figure(figures(1))
 subplot(3,2,5)
-lin_conv_vec=conv(x_vec,y_vec)*Delta_t;
-lin_conv_vec1=cconv(x_vec,y_vec,2*K-1)*Delta_t;
-lin_conv_vec2=ifft(fft(x_vec,2*K-1).*fft(y_vec,2*K-1))*Delta_t;
-plot(t_lin_conv_vec,[lin_conv_vec;lin_conv_vec1;lin_conv_vec2])
-xlabel('$k$','interpreter','latex')
-ylabel('$\left(x\overline{*}h\right)_{k}$','interpreter','latex')
-title('Linear Convolution');
+lin_conv_vec=conv(x_vec,y_vec)*D_t;
+lin_conv_vec1=cconv(x_vec,y_vec,N_z)*D_t;
+lin_conv_vec2=ifft(lin_Conv_vec);
+plot(kappa_lin_conv_vec/K_z,[lin_conv_vec;lin_conv_vec1;lin_conv_vec2])
+ylabel('$\left(x\overline{*}h\right)_{k}=\left(x_{\mathrm{z}}\bigotimes h_{\mathrm{z}}\right)_{k_{\mathrm{z}}=k} \; \forall \: 0\leq k\leq2K-2$','interpreter','latex')
+xlabel('$k_{\mathrm{z}}/K_{\mathrm{z}}$','interpreter','latex');
 legend(["conv","cconv","FFT"])
 
-%calculate and plot correlation
 subplot(3,2,6)
-lin_corr_vec=slow_xcorr(x_vec,y_vec)*Delta_t;
-lin_corr_vec1=fliplr(conv(x_vec,fliplr(y_vec)))*Delta_t;
-lin_corr_vec2=xcorr(y_vec,x_vec)*Delta_t;
-lin_corr_vec3=ifft(fft(y_vec,2*K-1).*conj(fft(x_vec,2*K-1)))*Delta_t;
-plot(tau_lin_corr_vec,[lin_corr_vec;lin_corr_vec1;lin_corr_vec2],t_lin_conv_vec,lin_corr_vec3);
-xlabel('$\kappa$','interpreter','latex')
-ylabel('$r_{xy,\kappa}^{\mathrm{lin}}$','interpreter','latex')
-title('Linear Correlation');
-legend(["sum","cconv","xcorr","FFT"])
+plot(n_z_vec/N_z,abs(lin_Conv_vec(1:N_z_no_fold)))
+ylabel('$\left|X_{\mathrm{z},n_{\mathrm{z}}}\,Y_{\mathrm{z},n_{\mathrm{z}}}\right|$','interpreter','latex')
+xlabel('$n_{\mathrm{z}}/N_{\mathrm{z}}$','interpreter','latex');
+
+%calculate and plot correlation
+lin_Corr_vec=Y_z_vec.*conj(X_z_vec)*D_t;
+
+figure(figures(2))
+subplot(3,2,5)
+lin_corr_vec=slow_xcorr(x_vec,y_vec)*D_t;
+lin_corr_vec1=fliplr(conv(x_vec,fliplr(y_vec)))*D_t;
+lin_corr_vec2=xcorr(y_vec,x_vec)*D_t;
+lin_corr_vec3=fftshift(ifft(lin_Corr_vec));
+plot(kappa_lin_corr_vec/K_z,[lin_corr_vec;lin_corr_vec1;lin_corr_vec2;lin_corr_vec3]);
+ylabel('$r_{xy,\kappa}^{\mathrm{lin}}=r_{x_{\mathrm{z}}y_{\mathrm{z}},\kappa_{\mathrm{z}}=\kappa}^{\mathrm{circ}} \; \forall \: -(K-1)\leq\kappa\leq K-1$','interpreter','latex')
+xlabel('$\kappa /K_{\mathrm{z}}$','interpreter','latex')
+legend(["$\sum$","cconv","xcorr","FFT"],'interpreter','latex','Location','northwest')
+
+subplot(3,2,6)
+plot(n_z_vec/N_z,abs(lin_Corr_vec(1:N_z_no_fold)));
+ylabel('$Y_{\mathrm{z},n_{\mathrm{z}}}\,\left(X_{\mathrm{z},n_{\mathrm{z}}}\right)^{*}\equiv R_{X_{\mathrm{z}}Y_{\mathrm{z}},n_{\mathrm{z}}}^{\mathrm{circ}}$','interpreter','latex')
+xlabel('$n_{\mathrm{z}}$','interpreter','latex')
 
 %Additional optimization of the axes for correct comparison with the correlation curves
-for ii=1:4
+figure(figures(1))
+for ii=[1,3]
     pos=get(subplot(3,2,ii),'Position');
-    pos(1)=pos(1)+pos(3)/3;
-    pos(3)=pos(3)*1/3;
+    pos(3)=pos(3)/2;
     set(subplot(3,2,ii),'Position',pos)
-    ylim([0,1.1*max([x_vec(:);y_vec(:)])])
+    xlim([-inf,0.5])
 end
-pos=get(subplot(3,2,5),'Position');
-pos(1)=pos(1)+pos(3)/3;
-pos(3)=pos(3)*2/3;
-set(subplot(3,2,5),'Position',pos)
+
+figure(figures(2))
+for ii=[1,3]
+    pos=get(subplot(3,2,ii),'Position');
+    pos(1)=pos(1)+pos(3)/2;
+    pos(3)=pos(3)/2;
+    set(subplot(3,2,ii),'Position',pos)
+    xlim([-inf,0.5])
+end
 
 export_figure(gcf,'==',"LinearConvCorr")
 
