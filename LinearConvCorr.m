@@ -1,5 +1,5 @@
 clc
-close all
+% close all
 clearvars
 
 set(groot,'DefaultAxesColorOrder',[1,0,0])
@@ -22,6 +22,12 @@ X_z_vec=fft(x_vec,N_z);
 Y_z_vec=fft(y_vec,N_z);
 n_z_vec=0:N_z_no_fold-1;
 
+N_z_fine=20*N;
+[~,~,~,N_z_fine_no_fold]=samplingParameters_D_t_N(D_t,N_z_fine);
+X_z_fine_vec=fft(x_vec,N_z_fine);
+Y_z_fine_vec=fft(y_vec,N_z_fine);
+n_z_fine_vec=0:N_z_fine_no_fold-1;
+
 %plot x and y signals
 figures=[figure,figure];
 titles="Linear "+["Convolution","Correlation"];
@@ -35,6 +41,7 @@ for ii=1:2
     
     subplot(3,2,2);
     plot(n_z_vec/N_z,abs(X_z_vec(1:N_z_no_fold)))
+    hold on,plot(n_z_fine_vec/N_z_fine,abs(X_z_fine_vec(1:N_z_fine_no_fold)),'-','Color',.4*[1,1,1],'DisplayName','$|X_{\mathrm{sw}}(f)|$ (DTSTFT)');hold off
     ylabel('$|X_{{\mathrm{z}},n_{\mathrm{z}}}|$','interpreter','latex')
     xlabel('$n_{\mathrm{z}}/N_{\mathrm{z}}$','interpreter','latex');
 
@@ -45,6 +52,7 @@ for ii=1:2
 
     subplot(3,2,4);
     plot(n_z_vec/N_z,abs(Y_z_vec(1:N_z_no_fold)))
+    hold on,plot(n_z_fine_vec/N_z_fine,abs(Y_z_fine_vec(1:N_z_fine_no_fold)),'-','Color',.4*[1,1,1],'DisplayName','$|Y_{\mathrm{sw}}(f)|$ (DTSTFT)');hold off
     ylabel('$|Y_{{\mathrm{z}},n_{\mathrm{z}}}|$','interpreter','latex')
     xlabel('$n_{\mathrm{z}}/N_{\mathrm{z}}$','interpreter','latex');
 
@@ -53,6 +61,7 @@ end
 
 %calculate and plot convolution
 lin_Conv_vec=X_z_vec.*Y_z_vec*D_t;
+lin_Conv_fine_vec=X_z_fine_vec.*Y_z_fine_vec*D_t;
 
 figure(figures(1))
 subplot(3,2,5)
@@ -66,11 +75,13 @@ legend(["conv","cconv","FFT"])
 
 subplot(3,2,6)
 plot(n_z_vec/N_z,abs(lin_Conv_vec(1:N_z_no_fold)))
+hold on,plot(n_z_fine_vec/N_z_fine,abs(lin_Conv_fine_vec(1:N_z_fine_no_fold)),'-','Color',.4*[1,1,1],'DisplayName','$|Y_{\mathrm{sw}}(f)|$ (DTSTFT)');hold off
 ylabel('$\left|X_{\mathrm{z},n_{\mathrm{z}}}\,Y_{\mathrm{z},n_{\mathrm{z}}}\right|$','interpreter','latex')
 xlabel('$n_{\mathrm{z}}/N_{\mathrm{z}}$','interpreter','latex');
 
 %calculate and plot correlation
 lin_Corr_vec=Y_z_vec.*conj(X_z_vec)*D_t;
+lin_Corr_fine_vec=Y_z_fine_vec.*conj(X_z_fine_vec)*D_t;
 
 figure(figures(2))
 subplot(3,2,5)
@@ -85,6 +96,7 @@ legend(["$\sum$","cconv","xcorr","FFT"],'interpreter','latex','Location','northw
 
 subplot(3,2,6)
 plot(n_z_vec/N_z,abs(lin_Corr_vec(1:N_z_no_fold)));
+hold on,plot(n_z_fine_vec/N_z_fine,abs(lin_Corr_fine_vec(1:N_z_fine_no_fold)),'-','Color',.4*[1,1,1],'DisplayName','$|Y_{\mathrm{sw}}(f)|$ (DTSTFT)');hold off
 ylabel('$Y_{\mathrm{z},n_{\mathrm{z}}}\,\left(X_{\mathrm{z},n_{\mathrm{z}}}\right)^{*}\equiv R_{X_{\mathrm{z}}Y_{\mathrm{z}},n_{\mathrm{z}}}^{\mathrm{circ}}$','interpreter','latex')
 xlabel('$n_{\mathrm{z}}$','interpreter','latex')
 

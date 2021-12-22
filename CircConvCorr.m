@@ -17,6 +17,12 @@ X_vec=fft(x_vec);
 Y_vec=fft(y_vec);
 n_vec=0:N_no_fold-1;
 
+N_z_fine=20*N;
+[~,~,~,N_z_fine_no_fold]=samplingParameters_D_t_N(D_t,N_z_fine);
+X_z_fine_vec=fft(x_vec,N_z_fine);
+Y_z_fine_vec=fft(y_vec,N_z_fine);
+n_z_fine_vec=0:N_z_fine_no_fold-1;
+
 %plot x and y signals
 figures=[figure,figure];
 titles="Circular "+["Convolution","Correlation"];
@@ -31,6 +37,7 @@ for ii=1:2
     
     subplot(3,2,2);
     plot(n_vec/N,abs(X_vec(1:N_no_fold)))
+    hold on,plot(n_z_fine_vec/N_z_fine,abs(X_z_fine_vec(1:N_z_fine_no_fold)),'-','Color',.4*[1,1,1],'DisplayName','$|X_{\mathrm{sw}}(f)|$ (DTSTFT)');hold off
     ylabel('$|X_{n}|$','interpreter','latex')
     xlabel('$n/N$','interpreter','latex');
     xlim([0,.5])
@@ -43,6 +50,7 @@ for ii=1:2
     
     subplot(3,2,4);
     plot(n_vec/N,abs(Y_vec(1:N_no_fold)))
+    hold on,plot(n_z_fine_vec/N_z_fine,abs(Y_z_fine_vec(1:N_z_fine_no_fold)),'-','Color',.4*[1,1,1],'DisplayName','$|Y_{\mathrm{sw}}(f)|$ (DTSTFT)');hold off
     ylabel('$|Y_{n}|$','interpreter','latex')
     xlabel('$n/N$','interpreter','latex');
     xlim([0,.5])
@@ -52,6 +60,7 @@ end
 
 %calculate and plot convolution
 circ_Conv_vec=X_vec.*Y_vec*D_t;
+circ_Conv_fine_vec=X_z_fine_vec.*Y_z_fine_vec*D_t;
 
 figure(figures(1))
 subplot(3,2,5)
@@ -64,13 +73,15 @@ ylabel('$\left(x \bigotimes h\right)_{k}$','interpreter','latex')
 legend(["FFT","cconv"],'Location','southeast')
 
 subplot(3,2,6)
-plot(n_vec/N,abs(circ_Conv_vec(1:N_no_fold)));
+plot(n_vec/N,abs(circ_Conv_vec(1:N_no_fold)))
+hold on,plot(n_z_fine_vec/N_z_fine,abs(circ_Conv_fine_vec(1:N_z_fine_no_fold)),'-','Color',.4*[1,1,1],'DisplayName','$|Y_{\mathrm{sw}}(f)|$ (DTSTFT)');hold off
 xlim([0,.5])
 xlabel('$n/N$','interpreter','latex')
 ylabel('$|X_{n} . H_{n}|$','interpreter','latex')
 
 %calculate and plot correlation
 circ_Corr_vec=conj(X_vec).*Y_vec;
+circ_Corr_fine_vec=conj(X_z_fine_vec).*Y_z_fine_vec;
 
 figure(figures(2))
 subplot(3,2,5)
@@ -85,6 +96,7 @@ legend(["FFT","cconv","$\sum$"],'interpreter','latex','Location','northeast')
 
 subplot(3,2,6)
 plot(n_vec/N,abs(circ_Corr_vec(1:N_no_fold)));
+hold on,plot(n_z_fine_vec/N_z_fine,abs(circ_Corr_fine_vec(1:N_z_fine_no_fold)),'-','Color',.4*[1,1,1],'DisplayName','$|Y_{\mathrm{sw}}(f)|$ (DTSTFT)');hold off
 xlim([0,.5])
 ylabel('$R_{XY,n}^{\mathrm{circ}}$','interpreter','latex')
 xlabel('$n/N$','interpreter','latex')
