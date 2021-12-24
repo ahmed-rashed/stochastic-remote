@@ -43,15 +43,18 @@ for ii=1:2
 
     ax=subplot(3,2,1);
     title('$K_{\mathrm{z}}\geq2K-1$','interpreter','latex')
-    hold on
+    yyaxis left
     plot(k_z_vec,x_z_vec)
+    ylims=ax.YLim;
+    yyaxis right
     plot(k_vec,x_vec)
-    hold off
     legend(["$x_{\mathrm{z},k_{\mathrm{z}}}$","$x_{k}$"],'interpreter','latex')
     ax.XTick=[0,K-1,K_z-1];
     ax.XTickLabel=["$0$","$K-1$","$K_{\mathrm{z}}-1$"];
     ax.XAxis.TickLabelInterpreter='latex';
     ax.XLim=[0,K_z-1];
+    [miny,maxy]=bounds([ylims,ax.YLim]);
+    ylim([miny,maxy]);
     ax.XGrid='on';
     
     ax=subplot(3,2,2);
@@ -61,18 +64,21 @@ for ii=1:2
     plot(n_vec/N,abs(X_vec(1:N_no_fold)))
     hold off
     ax.XTickLabel=[];
-    legend(["$|X_{\mathrm{sw}}(f)|$ (DTSTFT)","$|X_{{\mathrm{z}},n_{\mathrm{z}}}|$ (DTSTFT)","$|X_{n}|$ (DFT)"],'interpreter','latex')
+    legend(["$|X_{\mathrm{sw}}(f)|$ (DTSTFT)","$|X_{{\mathrm{z}},n_{\mathrm{z}}}|$","$|X_{n}|$ (DFT)"],'interpreter','latex')
 
     ax=subplot(3,2,3);
-    hold on
+    yyaxis left
     plot(k_z_vec,y_z_vec)
+    ylims=ax.YLim;
+    yyaxis right
     plot(k_vec,y_vec)
-    hold off
     legend(["$y_{\mathrm{z},k_{\mathrm{z}}}$","$y_{k}$"],'interpreter','latex')
     ax.XTick=[0,K-1,K_z-1];
     ax.XTickLabel=["$0$","$K-1$","$K_{\mathrm{z}}-1$"];
     ax.XAxis.TickLabelInterpreter='latex';
     ax.XLim=[0,K_z-1];
+    [miny,maxy]=bounds([ylims,ax.YLim]);
+    ylim([miny,maxy]);
     ax.XGrid='on';
 
     ax=subplot(3,2,4);
@@ -82,7 +88,7 @@ for ii=1:2
     plot(n_vec/N,abs(Y_vec(1:N_no_fold)))
     hold off
     ax.XTickLabel=[];
-    legend(["$|Y_{\mathrm{sw}}(f)|$ (DTSTFT)","$|Y_{{\mathrm{z}},n_{\mathrm{z}}}|$ (DTSTFT)","$|Y_{n}|$ (DFT)"],'interpreter','latex')
+    legend(["$|Y_{\mathrm{sw}}(f)|$ (DTSTFT)","$|Y_{{\mathrm{z}},n_{\mathrm{z}}}|$","$|Y_{n}|$ (DFT)"],'interpreter','latex')
 
     sgtitle(titles(ii))
 end
@@ -99,17 +105,22 @@ lin_conv_vec=conv(x_vec,y_vec)*D_t;
 lin_conv_vec1=cconv(x_vec,y_vec,N_z)*D_t;
 lin_conv_vec2=ifft(lin_Conv_vec);
 ax=subplot(3,2,5);
-hold on
-plot(k_vec,[circ_conv_vec;circ_conv_vec1]);
+yyaxis left
 plot(kappa_lin_conv_vec,[lin_conv_vec;lin_conv_vec1;lin_conv_vec2])
-hold off
+ylabel('$\left(x\overline{*}h\right)_{k}=\left(x_{\mathrm{z}}\bigotimes h_{\mathrm{z}}\right)_{k_{\mathrm{z}}=k}$','interpreter','latex')
+ylims=ax.YLim;
+yyaxis right
+plot(k_vec,[circ_conv_vec;circ_conv_vec1]);
+ylabel('$\left(x \bigotimes h\right)_{k}$','interpreter','latex')
 ax.XTick=[0,K-1,K_z-1];
 ax.XTickLabel=["$0$","$K-1$","$K_{\mathrm{z}}-1=2K-2$"];
 ax.XAxis.TickLabelInterpreter='latex';
 ax.XLim=[0,K_z-1];
-ylabel('$\left(x\overline{*}h\right)_{k}=\left(x_{\mathrm{z}}\bigotimes h_{\mathrm{z}}\right)_{k_{\mathrm{z}}=k}$','interpreter','latex')
 xlabel('$k,\quad k_{\mathrm{z}}$','interpreter','latex');
-legend(["FFT","cconv","conv","cconv","FFT"])
+legend(["$\left(x\overline{*}h\right)_{k}$ (conv)","$\hphantom{\left(x\overline{*}h\right)_{k}}$ (cconv)","$\hphantom{\left(x\overline{*}h\right)_{k}}$ (FFT)","$\left(x \bigotimes h\right)_{k}$ (FFT)","$\hphantom{\ensuremath{\left(x\bigotimes h\right)_{k}}}$ (cconv)"],'interpreter','latex')
+ax.XGrid='on';
+[miny,maxy]=bounds([ylims,ax.YLim]);
+ylim([miny,maxy]);
 ax.XGrid='on';
 
 subplot(3,2,6)
@@ -136,17 +147,22 @@ lin_corr_vec1=fliplr(conv(x_vec,fliplr(y_vec)))*D_t;
 lin_corr_vec2=xcorr(y_vec,x_vec)*D_t;
 lin_corr_vec3=fftshift(ifft(lin_Corr_vec));
 ax=subplot(3,2,5);
-hold on
-plot(k_vec,[circ_corr_vec;circ_corr_vec1;circ_corr_vec2]);
+yyaxis left
 plot(kappa_lin_corr_vec,[lin_corr_vec;lin_corr_vec1;lin_corr_vec2;lin_corr_vec3]);
-hold off
+ylims=ax.YLim;
+ylabel('$r_{xy,\kappa}^{\mathrm{lin}}=r_{x_{\mathrm{z}}y_{\mathrm{z}},\kappa_{\mathrm{z}}=\kappa}^{\mathrm{circ}}$','interpreter','latex')
+yyaxis right
+plot(k_vec,[circ_corr_vec;circ_corr_vec1;circ_corr_vec2]);
+ylabel('$r_{xy,\kappa}^{\mathrm{circ}}$','interpreter','latex')
 ax.XTick=[-(K-1),0,K-1];
 ax.XTickLabel=["$-(K-1)$","$0$","$K-1$"];
 ax.XAxis.TickLabelInterpreter='latex';
 ax.XLim=[-(K-1),K-1];
-ylabel('$r_{xy,\kappa}^{\mathrm{lin}}=r_{x_{\mathrm{z}}y_{\mathrm{z}},\kappa_{\mathrm{z}}=\kappa}^{\mathrm{circ}}$','interpreter','latex')
 xlabel('$k,\quad k_{\mathrm{z}},\quad \kappa$','interpreter','latex')
-legend(["FFT","cconv","$\sum$","$\sum$","cconv","xcorr","FFT"],'interpreter','latex','Location','northwest')
+legend(["$r_{xy,\kappa}^{\mathrm{lin}}$ $(\sum)$","$\hphantom{\ensuremath{r_{xy,\kappa}^{\mathrm{lin}}}}$ (cconv)","$\hphantom{\ensuremath{r_{xy,\kappa}^{\mathrm{lin}}}}$ (xcorr)","$\hphantom{\ensuremath{r_{xy,\kappa}^{\mathrm{lin}}}}$ (FFT)","$r_{xy,\kappa}^{\mathrm{circ}}$ (FFT)","$\hphantom{r_{xy,\kappa}^{\mathrm{circ}}}$ (cconv)","$\hphantom{r_{xy,\kappa}^{\mathrm{circ}}}$ ($\sum$)"],'interpreter','latex','Location','northwest')
+ax.XGrid='on';
+[miny,maxy]=bounds([ylims,ax.YLim]);
+ylim([miny,maxy]);
 ax.XGrid='on';
 
 subplot(3,2,6)
