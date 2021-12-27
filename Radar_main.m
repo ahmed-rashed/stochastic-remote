@@ -29,8 +29,8 @@ t_rnd_vec=(0:K_burst-1)*Delta_t;
 if rem(K_burst,1)~=0,error('T_burst should be selected as integer multiples of Delta_t'),end
 rng(11);
 x_rnd=randn(1,K_burst);
-f_c=100;    %cut off frequency
-[b,a]=butter(9,f_c/(f_s/2));
+f_c_by_f_Nyq=.8;    %cut off frequency
+[b,a]=butter(9,f_c_by_f_Nyq);
 x_rnd=filtfilt(b,a,x_rnd); 
 x_rnd=x_rnd-mean(x_rnd);
 x_rnd=x_rnd/std(x_rnd); % Makes mean(s)=0 & std(s)=1;
