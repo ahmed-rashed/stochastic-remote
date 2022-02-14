@@ -24,4 +24,8 @@ signal_fn=@(t) (sawtooth(t));
 for SNR=SNR_vec
     demonstrateCorrelation(signal_fn,SNR,f_max_by_f_Nyq,bestCaseLeakage,linearCorrelation)
     demonstrateSpectralDensity(signal_fn,SNR,i_win,linearCorrelation,f_max_by_f_Nyq,bestCaseLeakage)
+
+    linearCorrelation=false;
+    demonstrateCorrelation(signal_fn,SNR,f_max_by_f_Nyq,bestCaseLeakage,linearCorrelation)
+    demonstrateSpectralDensity(signal_fn,SNR,i_win,linearCorrelation,f_max_by_f_Nyq,bestCaseLeakage)
 end

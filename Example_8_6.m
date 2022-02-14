@@ -4,8 +4,8 @@ clearvars
 
 f_s=1000;
 T=5;
-[Delta_t,K,Delta_f]=samplingParameters_T_fs(T,f_s);
-t_vec=(0:K-1)*Delta_t;
+[D_t,K,D_f]=samplingParameters_T_fs(T,f_s);
+t_vec=(0:K-1)*D_t;
 
 rng(0);
 s=randn(1,K);
@@ -28,7 +28,7 @@ x=x+nx; y=y+ny;
 maxlag1=0.25*f_s; maxlag2=0.5*f_s;
 [Rss,tau1]=xcorr(s,s,maxlag1,'unbiased');
 [Rxy,tau2]=xcorr(y,x,maxlag2,'unbiased');
-tau1=tau1*Delta_t; tau2=tau2*Delta_t;
+tau1=tau1*D_t; tau2=tau2*D_t;
 
 figure(1) 
 plot(tau1,Rss)

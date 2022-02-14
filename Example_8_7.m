@@ -8,9 +8,9 @@ T_echo=2;
 T_burst=1;
 T=T_burst+T_echo+3;
 K=2^10; %K=1024
-[Delta_t,f_s,D_f]=samplingParameters_T_N(T,K);
-t_vec=(0:K-1)*Delta_t;
-tau_vec=(-(K-1):K-1)*Delta_t;
+[D_t,f_s,D_f]=samplingParameters_T_N(T,K);
+t_vec=(0:K-1)*D_t;
+tau_vec=(-(K-1):K-1)*D_t;
 
 s_fn_cvec={@(t) (chirp(t,5,1,15))};
 

@@ -7,9 +7,9 @@ set(groot,'DefaultAxesColorOrder',[1,0,0;0,0,1;0,0.5,0;1,0,1;0,0,0])
 %DFT parameters
 T=4;
 K=2^10; %K=1024
-[Delta_t,f_s,D_f]=samplingParameters_T_N(T,K);
-t_row=(0:K-1)*Delta_t;
-tau_row=(-(K-1):K-1)*Delta_t;
+[D_t,f_s,D_f]=samplingParameters_T_N(T,K);
+t_row=(0:K-1)*D_t;
+tau_row=(-(K-1):K-1)*D_t;
 
 %x(t) parameters
 T_burst=T/8;
@@ -24,9 +24,9 @@ T_1=T_burst;
 f_1=f_s/4;
 
 %Random signal parameters
-K_burst=T_burst/Delta_t;
-t_rnd_vec=(0:K_burst-1)*Delta_t;
-if rem(K_burst,1)~=0,error('T_burst should be selected as integer multiples of Delta_t'),end
+K_burst=T_burst/D_t;
+t_rnd_vec=(0:K_burst-1)*D_t;
+if rem(K_burst,1)~=0,error('T_burst should be selected as integer multiples of D_t'),end
 rng(11);
 x_rnd=randn(1,K_burst);
 f_c_by_f_Nyq=.8;    %cut off frequency

@@ -57,7 +57,7 @@ if linearCorrelation    %Linear correlation
     tau_row=(-(K-1):K-1)*D_t;
 else                    %Circular correlation
     K_z=K;
-    tau_row=(-(ceil(K/2)-1):floor((K+1)/2)-1)*D_t;
+    tau_row=(-ceil((K-1)/2):floor((K-1)/2))*D_t;
 end
 N_z=K_z;
 f_s_z=f_s;

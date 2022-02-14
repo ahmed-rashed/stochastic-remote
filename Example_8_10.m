@@ -8,9 +8,9 @@ x_std=2;
 f_s=10*f_n;
 N=250;
 K=N;
-[Delta_f,T,Delta_t]=samplingParameters_fs_N(f_s,N);
-t_row=(0:K-1)*Delta_t;
-f_row=(0:N-1)*Delta_f;
+[D_f,T,D_t]=samplingParameters_fs_N(f_s,N);
+t_row=(0:K-1)*D_t;
+f_row=(0:N-1)*D_f;
 
 h_exact_row=exp(-zeta*w_n*t_row)/m.*sin(w_d*t_row)/w_d;
 
@@ -20,14 +20,14 @@ K_long=RecordLengthMultiplier*K;
 rng(0);
 x_long_row=x_std*randn(1,K_long);    %std(x_long_row)=x_std
 
-y_long_row=filter(h_exact_row,1,x_long_row)*Delta_t;
+y_long_row=filter(h_exact_row,1,x_long_row)*D_t;
 
 % Study Linear Correlation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-r_xx_lin_row=xcorr(x_long_row,x_long_row,K)*Delta_t;    %r_xx_lin_row is 2*K+1 length. The biased and unbiased scalings is equivalent to multiplying by Delta_t/T. This is the suitable option for periodic and random signals
-r_yy_lin_row=xcorr(y_long_row,y_long_row,K)*Delta_t;    %r_yy_lin_row is 2*K+1 length
-r_xy_lin_row=xcorr(y_long_row,x_long_row,K)*Delta_t;    %r_xy_lin_row is 2*K+1 length
-tau_sym_row=(-K:K)*Delta_t;
+r_xx_lin_row=xcorr(x_long_row,x_long_row,K)*D_t;    %r_xx_lin_row is 2*K+1 length. The biased and unbiased scalings is equivalent to multiplying by D_t/T. This is the suitable option for periodic and random signals
+r_yy_lin_row=xcorr(y_long_row,y_long_row,K)*D_t;    %r_yy_lin_row is 2*K+1 length
+r_xy_lin_row=xcorr(y_long_row,x_long_row,K)*D_t;    %r_xy_lin_row is 2*K+1 length
+tau_sym_row=(-K:K)*D_t;
 
 figure
 subplot(3,1,1)
@@ -37,18 +37,18 @@ legend('$r_{xx}^{\mathrm{lin}} (\tau)/T$','interpreter','latex')
 set(gca,'XTickLabel',[]);
 
 subplot(3,1,2)
-r_hh_lin_row=xcorr(h_exact_row,h_exact_row,K)*Delta_t;
-plot(tau_sym_row,[r_yy_lin_row/T_long;r_hh_lin_row*x_std^2*Delta_t])
+r_hh_lin_row=xcorr(h_exact_row,h_exact_row,K)*D_t;
+plot(tau_sym_row,[r_yy_lin_row/T_long;r_hh_lin_row*x_std^2*D_t])
 legend(["$r_{yy}^{\mathrm{lin}} (\tau)/T$","$r_{hh}(\tau)$"],'interpreter','latex')
 set(gca,'XTickLabel',[]);
 
 subplot(3,1,3)
-plot(tau_sym_row,r_xy_lin_row/T_long,t_row,h_exact_row*x_std^2*Delta_t);
+plot(tau_sym_row,r_xy_lin_row/T_long,t_row,h_exact_row*x_std^2*D_t);
 legend(["$r_{xy}^{\mathrm{lin}} (\tau)/T$","$h^{\mathrm{exact}}(t)$"],'interpreter','latex')
 xlabel('$t$ \& $\tau$ (s)','interpreter','latex');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-f_row1=(0:2*K-2)*Delta_f/2;
+f_row1=(0:2*K-2)*D_f/2;
 H_exact_row=1./(w_n^2-(2*pi*f_row1).^2+2*1i*zeta*w_n*(2*pi*f_row1))/m;
 
 % Periodogram
